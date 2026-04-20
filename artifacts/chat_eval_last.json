@@ -1,0 +1,69 @@
+{
+  "summary": {
+    "ok": true,
+    "generated_at": "2026-04-08T17:10:56.015297+00:00",
+    "cases": 5,
+    "passed": 5,
+    "failed": 0,
+    "pass_rate_pct": 100.0,
+    "failed_case_ids": []
+  },
+  "cases": [
+    {
+      "id": "fact_no_citations_abstain",
+      "passed": true,
+      "expect_abstain": true,
+      "actual_abstain": true,
+      "expect_sources_suffix": false,
+      "actual_sources_suffix": false,
+      "citations": [],
+      "reply_preview": "Not found in retrieved tenders. I don't have enough grounded evidence to answer this reliably yet.\n\nTry narrowing by portal/sector/date, or ask me to show top matching tenders first."
+    },
+    {
+      "id": "fact_filter_mismatch_abstain",
+      "passed": true,
+      "expect_abstain": true,
+      "actual_abstain": true,
+      "expect_sources_suffix": false,
+      "actual_sources_suffix": false,
+      "citations": [
+        1
+      ],
+      "reply_preview": "Not found in retrieved tenders. I don't have enough grounded evidence to answer this reliably yet.\n\nTry narrowing by portal/sector/date, or ask me to show top matching tenders first."
+    },
+    {
+      "id": "fact_weak_signal_abstain",
+      "passed": true,
+      "expect_abstain": true,
+      "actual_abstain": true,
+      "expect_sources_suffix": false,
+      "actual_sources_suffix": false,
+      "citations": [
+        1
+      ],
+      "reply_preview": "Not found in retrieved tenders. I don't have enough grounded evidence to answer this reliably yet.\n\nTry narrowing by portal/sector/date, or ask me to show top matching tenders first."
+    },
+    {
+      "id": "fact_grounded_pass",
+      "passed": true,
+      "expect_abstain": false,
+      "actual_abstain": false,
+      "expect_sources_suffix": true,
+      "actual_sources_suffix": true,
+      "citations": [
+        1
+      ],
+      "reply_preview": "UNDP health consulting opportunity identified.\n\nSources: [1]"
+    },
+    {
+      "id": "nonfact_allows_response",
+      "passed": true,
+      "expect_abstain": false,
+      "actual_abstain": false,
+      "expect_sources_suffix": false,
+      "actual_sources_suffix": false,
+      "citations": [],
+      "reply_preview": "Overall trend is stable."
+    }
+  ]
+}

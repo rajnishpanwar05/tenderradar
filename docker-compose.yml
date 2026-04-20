@@ -1,0 +1,176 @@
+# =============================================================================
+# docker-compose.yml — TenderRadar Full Stack
+#
+# Usage:
+#   docker-compose up -d                  # Start all services
+#   docker-compose logs -f backend        # View backend logs
+#   docker-compose logs -f frontend       # View frontend logs
+#   docker-compose down                   # Stop all services
+# =============================================================================
+
+version: '3.8'
+
+services:
+  # ─────────────────────────────────────────────────────────────────────────
+  # MySQL Database
+  # ─────────────────────────────────────────────────────────────────────────
+  mysql:
+    image: mysql:8.0
+    container_name: tenderradar-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASS:-your_password}
+      MYSQL_DATABASE: ${DB_NAME:-tender_monitor}
+    ports:
+      # Host 3307 avoids colliding with a native local MySQL on 3306.
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - tenderradar
+
+  # ─────────────────────────────────────────────────────────────────────────
+  # FastAPI Backend
+  # ─────────────────────────────────────────────────────────────────────────
+  backend:
+    build: .
+    container_name: tenderradar-backend
+    command: python run_api.py
+    environment:
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_USER: ${DB_USER:-root}
+      DB_PASS: ${DB_PASS:-your_password}
+      DB_NAME: ${DB_NAME:-tender_monitor}
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
+      TELEGRAM_BOT_TOKEN: ${TELEGRAM_BOT_TOKEN}
+      TELEGRAM_CHAT_ID: ${TELEGRAM_CHAT_ID}
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+      - ./output:/app/output
+      - ./logs:/app/logs
+      - ./chroma_db:/app/chroma_db
+      - ./artifacts:/app/artifacts
+    depends_on:
+      mysql:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    networks:
+      - tenderradar
+    restart: unless-stopped
+
+  # ─────────────────────────────────────────────────────────────────────────
+  # Next.js Frontend
+  # ─────────────────────────────────────────────────────────────────────────
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: tenderradar-frontend
+    environment:
+      NEXT_PUBLIC_API_URL: http://backend:8000
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+      - /app/.next
+    networks:
+      - tenderradar
+    restart: unless-stopped
+
+  # ─────────────────────────────────────────────────────────────────────────
+  # Ollama (Local LLM Fallback)
+  # ─────────────────────────────────────────────────────────────────────────
+  ollama:
+    image: ollama/ollama:latest
+    container_name: tenderradar-ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+    environment:
+      OLLAMA_HOST: 0.0.0.0:11434
+    networks:
+      - tenderradar
+    restart: unless-stopped
+    # Pull model on startup: docker exec tenderradar-ollama ollama pull llama3.2
+
+  # ─────────────────────────────────────────────────────────────────────────
+  # Redis Queue (Message Broker for Celery worker processes)
+  # ─────────────────────────────────────────────────────────────────────────
+  redis:
+    image: redis:7.2-alpine
+    container_name: tenderradar-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - tenderradar
+    restart: unless-stopped
+
+  # ─────────────────────────────────────────────────────────────────────────
+  # Celery Background Worker (Asynchronous LLM Processing)
+  # ─────────────────────────────────────────────────────────────────────────
+  celery_worker:
+    build: .
+    container_name: tenderradar-celery
+    command: celery -A core.tasks worker --loglevel=info -E
+    environment:
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_USER: ${DB_USER:-root}
+      DB_PASS: ${DB_PASS:-your_password}
+      DB_NAME: ${DB_NAME:-tender_monitor}
+      REDIS_URL: redis://redis:6379/0
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
+      TELEGRAM_BOT_TOKEN: ${TELEGRAM_BOT_TOKEN}
+      TELEGRAM_CHAT_ID: ${TELEGRAM_CHAT_ID}
+    depends_on:
+      - redis
+      - mysql
+    volumes:
+      - .:/app
+      - ./output:/app/output
+      - ./logs:/app/logs
+      - ./chroma_db:/app/chroma_db
+    networks:
+      - tenderradar
+    restart: unless-stopped
+
+  # ─────────────────────────────────────────────────────────────────────────
+  # ChromaDB Vector Store
+  # ─────────────────────────────────────────────────────────────────────────
+  # (Can be local or this container — adjust as needed)
+  # chroma:
+  #   image: chromadb/chroma:latest
+  #   container_name: tenderradar-chroma
+  #   ports:
+  #     - "8001:8000"
+  #   volumes:
+  #     - chroma_data:/data
+  #   networks:
+  #     - tenderradar
+
+volumes:
+  mysql_data:
+  ollama_data:
+  redis_data:
+  # chroma_data:
+
+networks:
+  tenderradar:
+    driver: bridge

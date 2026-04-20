@@ -1,0 +1,166 @@
+{
+  "_comment": "Firm profile — configure for your consulting firm. Used by keywords.py Layer 5 for opportunity scoring.",
+
+  "preferred_sectors": [
+    "education", "health", "governance", "water", "gender",
+    "climate", "agriculture", "energy", "finance", "digital"
+  ],
+
+  "preferred_regions": [
+    "South Asia", "Africa", "Southeast Asia", "Central Asia", "Middle East"
+  ],
+
+  "preferred_clients": [
+    "World Bank", "UNDP", "UNICEF", "ADB", "AfDB", "AFD",
+    "GIZ", "USAID", "FCDO/DFID", "WHO", "WFP", "FAO", "IFAD",
+    "European Union", "IFC", "UNIDO", "UN Women", "IOM", "UNHCR",
+    "The Hans Foundation", "CIFF", "Bill & Melinda Gates Foundation",
+    "PwC", "Deloitte", "KPMG", "NITI Aayog",
+    "SIDA", "NORAD", "JICA", "KOICA",
+    "GAVI", "Global Fund", "Green Climate Fund", "GEF"
+  ],
+
+  "preferred_consulting_types": [
+    "evaluation", "research", "capacity building", "policy",
+    "technical assistance", "advisory", "implementation support",
+    "feasibility study"
+  ],
+
+  "preferred_keywords": {
+    "baseline survey": 12,
+    "baseline study": 12,
+    "endline": 11,
+    "endline assessment": 12,
+    "endline survey": 12,
+    "mid-term review": 10,
+    "mid-term evaluation": 10,
+    "impact assessment": 12,
+    "impact evaluation": 12,
+    "third party monitoring": 13,
+    "independent verification agency": 13,
+    "customer satisfaction survey": 10,
+    "kap survey": 10,
+    "data collection": 8,
+    "technical assistance": 10,
+    "evaluation": 9,
+    "capacity building": 9,
+    "livelihood": 7,
+    "agriculture": 7,
+    "climate": 7,
+    "forestry": 7,
+    "renewable energy": 8,
+    "wash": 8,
+    "social assessment": 8,
+    "environmental and social assessment": 10,
+    "tvet": 7,
+    "foundational literacy": 8,
+    "msme": 6,
+    "m&e framework": 9,
+    "theory of change": 8,
+    "results framework": 8,
+    "logframe": 7,
+    "mixed methods": 7,
+    "quasi-experimental": 8,
+    "gender audit": 8,
+    "gender assessment": 8,
+    "social audit": 7,
+    "process documentation": 7,
+    "gis mapping": 7,
+    "geospatial": 7,
+    "beneficiary feedback": 7,
+    "grievance redressal": 6,
+    "multi-state": 6,
+    "large-scale survey": 8,
+    "concurrent monitoring": 9,
+    "real-time monitoring": 9,
+    "rapid assessment": 8,
+    "needs assessment": 8,
+    "institutional strengthening": 7,
+    "organizational development": 7,
+    "training of trainers": 7,
+    "stakeholder consultation": 6
+  },
+
+  "avoid_sectors": [
+    "infrastructure", "transport"
+  ],
+
+  "avoid_keywords": [
+    "supply of",
+    "procurement of goods",
+    "civil works",
+    "construction of",
+    "purchase of",
+    "supply and installation",
+    "printing and stationery",
+    "law firm",
+    "legal consultant",
+    "legal advisory",
+    "legal services",
+    "empanelment of advocates",
+    "chartered accountant",
+    "ca firm",
+    "statutory auditor",
+    "tax consultant",
+    "architecture firm",
+    "software development",
+    "app development",
+    "web development",
+    "erp implementation",
+    "vendor registration",
+    "rate contract",
+    "purchase order",
+    "supply and delivery",
+    "fabrication",
+    "repair and maintenance",
+    "manpower supply",
+    "outsourcing of staff",
+    "security guard",
+    "security services",
+    "housekeeping",
+    "cleaning services",
+    "data entry operator",
+    "supply of medicines",
+    "supply of equipment",
+    "catering services"
+  ],
+
+  "negative_keywords": {
+    "procurement of goods": -15,
+    "supply of": -12,
+    "construction": -14,
+    "civil works": -16,
+    "hardware": -10,
+    "equipment supply": -10,
+    "software development": -14,
+    "web development": -14,
+    "mobile app development": -14,
+    "legal services": -14,
+    "chartered accountant": -12,
+    "audit of accounts": -10,
+    "manpower supply": -14,
+    "housekeeping": -12,
+    "security services": -12,
+    "law firm": -16,
+    "architecture firm": -14,
+    "interior design": -12,
+    "supply and delivery": -14,
+    "fabrication": -12,
+    "catering services": -10
+  },
+
+  "score_boosts": {
+    "preferred_sector":          10,
+    "preferred_region":           6,
+    "preferred_client":          15,
+    "preferred_consulting_type":  5
+  },
+
+  "score_penalties": {
+    "avoid_sector":             -15,
+    "avoid_keyword_in_title":   -20,
+    "unknown_organization":      -8,
+    "expired_deadline":         -999,
+    "unknown_consulting_type":   -5
+  }
+}

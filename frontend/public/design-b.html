@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Design B — Clean Intelligence</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Inter',sans-serif;background:#F8FAFC;color:#0F172A;min-height:100vh;display:flex}
+
+  .sidebar{width:240px;background:#fff;border-right:1px solid #E2E8F0;padding:0;display:flex;flex-direction:column;flex-shrink:0}
+  .logo{padding:22px 24px;font-weight:900;font-size:17px;letter-spacing:-0.5px;border-bottom:1px solid #E2E8F0}
+  .logo span{color:#6366F1}
+  .nav{padding:16px 12px;flex:1}
+  .nav-section{font-size:10px;font-weight:700;color:#94A3B8;letter-spacing:1px;padding:12px 12px 6px;text-transform:uppercase}
+  .nav-item{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:8px;cursor:pointer;font-size:13px;font-weight:500;color:#475569;margin-bottom:1px}
+  .nav-item:hover{background:#F1F5F9;color:#0F172A}
+  .nav-item.active{background:#EEF2FF;color:#6366F1;font-weight:600}
+  .nav-item svg{width:16px;height:16px;flex-shrink:0}
+  .count-pill{background:#6366F120;color:#6366F1;font-size:10px;font-weight:700;padding:2px 7px;border-radius:20px;margin-left:auto}
+  .count-pill.green{background:#DCFCE7;color:#16A34A}
+  .sidebar-bottom{padding:16px 24px 24px;border-top:1px solid #E2E8F0}
+  .user-row{display:flex;align-items:center;gap:10px}
+  .avatar{width:34px;height:34px;background:linear-gradient(135deg,#6366F1,#8B5CF6);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#fff;flex-shrink:0}
+  .user-name{font-size:13px;font-weight:600}
+  .user-role{font-size:11px;color:#94A3B8}
+
+  .main{flex:1;overflow-y:auto}
+  .topbar{background:#fff;border-bottom:1px solid #E2E8F0;padding:18px 32px;display:flex;align-items:center;gap:16px;position:sticky;top:0;z-index:10}
+  .topbar h1{font-size:18px;font-weight:700;letter-spacing:-0.3px;flex:1}
+  .search-box{display:flex;align-items:center;gap:8px;background:#F8FAFC;border:1px solid #E2E8F0;border-radius:8px;padding:8px 14px;width:260px}
+  .search-box input{background:none;border:none;outline:none;color:#0F172A;font-size:13px;width:100%;font-family:inherit}
+  .search-box input::placeholder{color:#94A3B8}
+  .btn-primary{background:#6366F1;color:#fff;border:none;padding:8px 18px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit}
+  .badge-live{background:#DCFCE7;color:#16A34A;border:1px solid #BBF7D0;padding:4px 12px;border-radius:20px;font-size:11px;font-weight:700}
+
+  .content{padding:32px}
+
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:28px}
+  .stat-card{background:#fff;border:1px solid #E2E8F0;border-radius:12px;padding:20px;position:relative}
+  .stat-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:12px}
+  .stat-icon{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px}
+  .stat-icon.blue{background:#EFF6FF}
+  .stat-icon.purple{background:#EEF2FF}
+  .stat-icon.green{background:#DCFCE7}
+  .stat-icon.amber{background:#FEF3C7}
+  .stat-change{font-size:11px;color:#16A34A;font-weight:600;background:#DCFCE7;padding:2px 8px;border-radius:20px}
+  .stat-value{font-size:30px;font-weight:800;letter-spacing:-1px;color:#0F172A}
+  .stat-label{font-size:12px;color:#64748B;margin-top:2px}
+  .stat-bar{height:3px;background:#E2E8F0;border-radius:2px;margin-top:14px;overflow:hidden}
+  .stat-bar-fill{height:100%;border-radius:2px}
+  .bar-blue{background:#6366F1}
+  .bar-green{background:#16A34A}
+  .bar-purple{background:#8B5CF6}
+  .bar-amber{background:#F59E0B}
+
+  .two-col{display:grid;grid-template-columns:1fr 380px;gap:20px}
+
+  .card{background:#fff;border:1px solid #E2E8F0;border-radius:12px;overflow:hidden}
+  .card-header{padding:16px 20px;border-bottom:1px solid #E2E8F0;display:flex;align-items:center;justify-content:space-between}
+  .card-title{font-size:13px;font-weight:700;color:#0F172A}
+  .view-all{font-size:12px;color:#6366F1;cursor:pointer;font-weight:500}
+
+  table{width:100%;border-collapse:collapse}
+  thead th{padding:10px 20px;font-size:10px;font-weight:700;color:#94A3B8;text-transform:uppercase;letter-spacing:0.5px;text-align:left;background:#F8FAFC;border-bottom:1px solid #E2E8F0}
+  tbody tr{border-bottom:1px solid #F1F5F9;cursor:pointer;transition:background 0.1s}
+  tbody tr:last-child{border-bottom:none}
+  tbody tr:hover{background:#F8FAFC}
+  td{padding:12px 20px;font-size:13px;vertical-align:top}
+  .portal-pill{font-size:9px;font-weight:700;letter-spacing:0.5px;padding:3px 8px;border-radius:4px;text-transform:uppercase;white-space:nowrap}
+  .p-wb{background:#EFF6FF;color:#2563EB}
+  .p-ungm{background:#EEF2FF;color:#7C3AED}
+  .p-gem{background:#DCFCE7;color:#15803D}
+  .p-giz{background:#FEF3C7;color:#B45309}
+  .score{font-size:12px;font-weight:800;color:#6366F1}
+  .fit-good{background:#DCFCE7;color:#15803D;font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px}
+  .fit-fair{background:#FEF3C7;color:#B45309;font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px}
+  .fit-low{background:#FEE2E2;color:#DC2626;font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px}
+  .title-main{font-weight:500;color:#0F172A;line-height:1.4;max-width:280px;font-size:12px}
+  .title-sub{font-size:11px;color:#94A3B8;margin-top:2px}
+
+  .right-panel{display:flex;flex-direction:column;gap:16px}
+  .chat-card{background:linear-gradient(135deg,#6366F1 0%,#8B5CF6 100%);border-radius:12px;padding:24px;color:#fff}
+  .chat-card h3{font-size:16px;font-weight:700;margin-bottom:6px}
+  .chat-card p{font-size:12px;opacity:0.85;line-height:1.5;margin-bottom:16px}
+  .chat-input-row{display:flex;gap:8px}
+  .chat-input{flex:1;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.2);border-radius:8px;padding:8px 12px;color:#fff;font-size:12px;font-family:inherit;outline:none}
+  .chat-input::placeholder{color:rgba(255,255,255,0.5)}
+  .chat-send{background:#fff;color:#6366F1;border:none;padding:8px 14px;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit}
+
+  .portals-card .card-body{padding:16px 20px}
+  .portal-row{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+  .portal-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+  .portal-name{font-size:12px;font-weight:500;flex:1;color:#374151}
+  .portal-count{font-size:11px;color:#6366F1;font-weight:700}
+  .portal-bar{height:4px;flex:2;background:#F1F5F9;border-radius:2px;overflow:hidden}
+  .pb-fill{height:100%;background:#6366F1;border-radius:2px}
+
+  .deadline-chip{font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px;background:#FEF3C7;color:#B45309}
+</style>
+</head>
+<body>
+
+<div class="sidebar">
+  <div class="logo">Tender<span>Radar</span></div>
+  <nav class="nav">
+    <div class="nav-section">Main</div>
+    <div class="nav-item active">
+      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+      Dashboard
+    </div>
+    <div class="nav-item">
+      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+      All Tenders
+      <span class="count-pill">23,606</span>
+    </div>
+    <div class="nav-item">
+      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+      AI Assistant
+    </div>
+    <div class="nav-section">Insights</div>
+    <div class="nav-item">
+      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+      Analytics
+    </div>
+    <div class="nav-item">
+      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 0v10"/></svg>
+      Pipeline
+    </div>
+    <div class="nav-item">
+      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><circle cx="12" cy="12" r="9" stroke-width="2"/><path stroke-linecap="round" stroke-width="2" d="M12 8v4l2 2"/></svg>
+      Portals
+      <span class="count-pill green">19</span>
+    </div>
+  </nav>
+  <div class="sidebar-bottom">
+    <div class="user-row">
+      <div class="avatar">R</div>
+      <div>
+        <div class="user-name">Rajnish Panwar</div>
+        <div class="user-role">IDCG · Admin</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+  <div class="topbar">
+    <h1>Dashboard</h1>
+    <div class="search-box">
+      <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="#94A3B8"><circle cx="11" cy="11" r="8" stroke-width="2"/><path stroke-linecap="round" stroke-width="2" d="M21 21l-4.35-4.35"/></svg>
+      <input placeholder="Search tenders…">
+    </div>
+    <div class="badge-live">● Live</div>
+    <button class="btn-primary">+ Run Scrapers</button>
+  </div>
+
+  <div class="content">
+    <div style="margin-bottom:24px">
+      <p style="font-size:13px;color:#64748B">Good morning, Rajnish · 27 March 2026</p>
+      <h2 style="font-size:20px;font-weight:800;margin-top:4px;letter-spacing:-0.5px">Found <span style="color:#6366F1">138 high-priority</span> tenders since your last login</h2>
+    </div>
+
+    <div class="stats">
+      <div class="stat-card">
+        <div class="stat-top">
+          <div class="stat-icon blue">📊</div>
+          <span class="stat-change">+412</span>
+        </div>
+        <div class="stat-value">23,606</div>
+        <div class="stat-label">Total Tenders</div>
+        <div class="stat-bar"><div class="stat-bar-fill bar-blue" style="width:82%"></div></div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-top">
+          <div class="stat-icon green">🎯</div>
+          <span class="stat-change">+12</span>
+        </div>
+        <div class="stat-value">138</div>
+        <div class="stat-label">High Priority · BID</div>
+        <div class="stat-bar"><div class="stat-bar-fill bar-green" style="width:45%"></div></div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-top">
+          <div class="stat-icon purple">🌐</div>
+        </div>
+        <div class="stat-value">19</div>
+        <div class="stat-label">Active Portals</div>
+        <div class="stat-bar"><div class="stat-bar-fill bar-purple" style="width:73%"></div></div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-top">
+          <div class="stat-icon amber">⏰</div>
+          <span style="font-size:11px;color:#DC2626;font-weight:700;background:#FEE2E2;padding:2px 8px;border-radius:20px">Urgent</span>
+        </div>
+        <div class="stat-value">24</div>
+        <div class="stat-label">Closing in 7 days</div>
+        <div class="stat-bar"><div class="stat-bar-fill bar-amber" style="width:30%"></div></div>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">⚡ Top Recommendations</span>
+          <span class="view-all">View all →</span>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Portal</th>
+              <th>Title</th>
+              <th>Score</th>
+              <th>Fit</th>
+              <th>Deadline</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="portal-pill p-wb">World Bank</span></td>
+              <td><div class="title-main">Consultancy for Climate Change Adaptation Assessment</div><div class="title-sub">Org: World Bank</div></td>
+              <td><span class="score">100</span></td>
+              <td><span class="fit-good">GOOD</span></td>
+              <td style="font-size:12px;color:#94A3B8">—</td>
+            </tr>
+            <tr>
+              <td><span class="portal-pill p-ungm">UNGM</span></td>
+              <td><div class="title-main">RFP EM/YEM Provision of Monitoring Services</div><div class="title-sub">Org: WHO</div></td>
+              <td><span class="score">98</span></td>
+              <td><span class="fit-low">LOW</span></td>
+              <td style="font-size:12px;color:#94A3B8">—</td>
+            </tr>
+            <tr>
+              <td><span class="portal-pill p-wb">World Bank</span></td>
+              <td><div class="title-main">Independent Evaluation of PRFAS Program</div><div class="title-sub">Org: World Bank</div></td>
+              <td><span class="score">96</span></td>
+              <td><span class="fit-fair">FAIR</span></td>
+              <td style="font-size:12px;color:#94A3B8">—</td>
+            </tr>
+            <tr>
+              <td><span class="portal-pill p-gem">GeM</span></td>
+              <td><div class="title-main">Rural Development Impact Assessment Consulting</div><div class="title-sub">Org: Ministry of Rural Dev.</div></td>
+              <td><span class="score">93</span></td>
+              <td><span class="fit-low">LOW</span></td>
+              <td><span class="deadline-chip">3 days</span></td>
+            </tr>
+            <tr>
+              <td><span class="portal-pill p-giz">GIZ</span></td>
+              <td><div class="title-main">Technical Assistance for Social Protection Programme</div><div class="title-sub">Org: GIZ India</div></td>
+              <td><span class="score">91</span></td>
+              <td><span class="fit-good">GOOD</span></td>
+              <td style="font-size:12px;color:#94A3B8">Apr 15</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="right-panel">
+        <div class="chat-card">
+          <h3>🤖 TenderRadar AI</h3>
+          <p>23,606 projects indexed. Ask me to find, compare, or analyze any opportunity.</p>
+          <div class="chat-input-row">
+            <input class="chat-input" placeholder="e.g. 'Top health tenders in Africa'">
+            <button class="chat-send">Ask →</button>
+          </div>
+        </div>
+
+        <div class="card portals-card">
+          <div class="card-header">
+            <span class="card-title">Active Portals</span>
+            <span class="view-all">Manage</span>
+          </div>
+          <div class="card-body">
+            <div class="portal-row">
+              <div class="portal-dot" style="background:#2563EB"></div>
+              <span class="portal-name">World Bank</span>
+              <div class="portal-bar"><div class="pb-fill" style="width:90%"></div></div>
+              <span class="portal-count">486</span>
+            </div>
+            <div class="portal-row">
+              <div class="portal-dot" style="background:#7C3AED"></div>
+              <span class="portal-name">UNGM</span>
+              <div class="portal-bar"><div class="pb-fill" style="width:40%"></div></div>
+              <span class="portal-count">214</span>
+            </div>
+            <div class="portal-row">
+              <div class="portal-dot" style="background:#15803D"></div>
+              <span class="portal-name">GeM BidPlus</span>
+              <div class="portal-bar"><div class="pb-fill" style="width:100%"></div></div>
+              <span class="portal-count">2,103</span>
+            </div>
+            <div class="portal-row">
+              <div class="portal-dot" style="background:#B45309"></div>
+              <span class="portal-name">GIZ India</span>
+              <div class="portal-bar"><div class="pb-fill" style="width:30%"></div></div>
+              <span class="portal-count">14</span>
+            </div>
+            <div class="portal-row">
+              <div class="portal-dot" style="background:#0EA5E9"></div>
+              <span class="portal-name">TED EU</span>
+              <div class="portal-bar"><div class="pb-fill" style="width:20%"></div></div>
+              <span class="portal-count">21</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

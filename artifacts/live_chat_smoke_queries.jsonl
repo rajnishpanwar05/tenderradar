@@ -1,0 +1,15 @@
+{"id":"q01_undp_health_africa_only","query":"Show me only UNDP health consulting opportunities in Africa this month","expect_abstain":false,"expect_portal":"UNDP","min_sources":1}
+{"id":"q02_worldbank_governance_only","query":"Show me only World Bank governance advisory tenders","expect_abstain":false,"expect_portal":"World Bank","min_sources":3}
+{"id":"q03_ungm_nutrition","query":"List UNGM consulting opportunities for nutrition and public health","expect_abstain":false,"expect_portal":"UNGM","min_sources":3}
+{"id":"q04_ec_climate_research","query":"Find EC climate change research consulting tenders","expect_abstain":false,"expect_portal":"EC","min_sources":1}
+{"id":"q05_ted_education_policy","query":"Show TED-EU education policy advisory opportunities","expect_abstain":false,"expect_portal":"TED","min_sources":1}
+{"id":"q06_wash_south_asia","query":"Urgent WASH consulting tenders in South Asia","expect_abstain":false,"min_sources":3}
+{"id":"q07_mel_africa","query":"Top monitoring and evaluation tenders in Africa this month","expect_abstain":false,"min_sources":3}
+{"id":"q08_infra_karnataka_only","query":"Show me only Karnataka civil works tenders","expect_abstain":false,"expect_portal":"Karnataka","min_sources":3}
+{"id":"q09_unknown_portal_unicef","query":"Show me tenders from UNICEF portal only","expect_abstain":true}
+{"id":"q10_over_specific_constraint","query":"Show me only UNDP health tenders in Africa with exact budget and deadline in one line","expect_abstain":false,"expect_portal":"UNDP","min_sources":1}
+{"id":"q11_fact_no_guessing","query":"What is the exact budget amount and deadline for the top UNDP health opportunity?","expect_abstain":false,"min_sources":1}
+{"id":"q12_compare_nonfact","query":"Compare this week’s trend across World Bank, UNDP, and UNGM consulting tenders","expect_abstain":false,"min_sources":3}
+{"id":"q13_gender_inclusion","query":"Top gender and social inclusion consulting tenders in Asia","expect_abstain":false,"min_sources":3}
+{"id":"q14_agri_livelihoods","query":"Find agriculture and livelihoods evaluation opportunities for consulting firms","expect_abstain":false,"min_sources":3}
+{"id":"q15_strict_portal_mismatch_trap","query":"Show me only World Bank tenders in health from UNDP","expect_abstain":true}

@@ -1,0 +1,109 @@
+# =============================================================================
+# .gitignore — Tender Monitoring System
+# =============================================================================
+
+# ── Credentials (NEVER commit) ─────────────────────────────────────────────
+.env
+*.env
+.env.*
+secrets.py
+credentials.py
+
+# ── Python cache ─────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.pyc
+
+# ── Virtual environments ──────────────────────────────────────────────────────
+venv/
+venv_stable/
+.venv/
+env/
+ENV/
+
+# ── Output files (large, regenerated each run) ───────────────────────────────
+output/
+*.xlsx
+*.xls
+*.csv
+run.log
+*.log
+
+# ── PDF / document downloads (we store links, not files) ─────────────────────
+*.pdf
+output/bid_pdfs/
+output/procurement_pdfs/
+
+# ── ChromaDB vector store ─────────────────────────────────────────────────────
+chroma_db/
+
+# ── macOS ─────────────────────────────────────────────────────────────────────
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# ── IDE ───────────────────────────────────────────────────────────────────────
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# ── Jupyter ───────────────────────────────────────────────────────────────────
+.ipynb_checkpoints/
+*.ipynb
+
+# ── Test artifacts ────────────────────────────────────────────────────────────
+.pytest_cache/
+.coverage
+htmlcov/
+
+# ── Node.js / Next.js ─────────────────────────────────────────────────────────
+node_modules/
+frontend/node_modules/
+frontend/.next/
+frontend/out/
+frontend/.env.local
+frontend/.env.development.local
+frontend/.env.test.local
+frontend/.env.production.local
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ── ML model artifacts (large binary files) ───────────────────────────────────
+*.pkl
+*.joblib
+*.model
+models/
+
+# ── SQLite / local databases ──────────────────────────────────────────────────
+*.db
+*.sqlite3
+
+# ── Monitoring temp files ─────────────────────────────────────────────────────
+monitoring/health.db
+/tmp/
+
+# ── Claude Code IDE settings (local only) ────────────────────────────────────
+.claude/
+
+# ── Internal / operational docs (not for public portfolio repo) ───────────────
+SYSTEM_STATE.md
+PROJECT_ROADMAP.md
+DASHBOARD_USAGE_GUIDE.md
+SETUP_FOR_FRIEND.sh
+IDCG_Keywords_and_Filters.docx
+TESTING_ML_GUIDE.md
+QUICK_ML_TEST.sh
+translate_docx.py
+dashboard_data_loader.py
+recalculate_dashboard.py
+excel_dashboard_builder.py
+search_*.json
+insights.log
+rescore.log
+deep_backfill.log
+chat_smoke.log

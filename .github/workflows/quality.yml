@@ -1,0 +1,134 @@
+name: Code Quality & Security
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    name: Lint & Format Check
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install black pylint bandit flake8 isort
+
+      - name: Check formatting with Black
+        run: black --check --diff .
+        continue-on-error: true
+
+      - name: Import sorting with isort
+        run: isort --check-only .
+        continue-on-error: true
+
+      - name: Lint with Pylint
+        run: |
+          pylint --disable=all --enable=E,F \
+            intelligence/*.py \
+            database/*.py \
+            api/routes/*.py \
+            pipeline/*.py
+        continue-on-error: true
+
+      - name: Security scan with Bandit
+        run: bandit -r intelligence/ database/ api/ pipeline/ --skip B101
+        continue-on-error: true
+
+      - name: Linting with Flake8
+        run: |
+          flake8 intelligence/ database/ api/ pipeline/ \
+            --count --statistics \
+            --max-line-length=120 \
+            --extend-ignore=E203,W503
+        continue-on-error: true
+
+  security:
+    runs-on: ubuntu-latest
+    name: Dependency Security
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install safety
+
+      - name: Check dependencies with Safety
+        run: safety check --json
+        continue-on-error: true
+
+  test:
+    runs-on: ubuntu-latest
+    name: Unit Tests
+
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: test_password
+          MYSQL_DATABASE: tender_monitor_test
+        options: >-
+          --health-cmd="mysqladmin ping"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=3
+        ports:
+          - 3306:3306
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pytest pytest-cov mysql-connector-python
+          pip install -r requirements.txt
+
+      - name: Run tests
+        run: pytest tests/ -v --cov=intelligence --cov=database --cov-report=xml
+        continue-on-error: true
+
+      - name: Upload coverage reports
+        uses: codecov/codecov-action@v3
+        with:
+          files: ./coverage.xml
+        continue-on-error: true
+
+  docker:
+    runs-on: ubuntu-latest
+    name: Docker Build Check
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Build Docker image
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          push: false
+          tags: tenderradar:ci

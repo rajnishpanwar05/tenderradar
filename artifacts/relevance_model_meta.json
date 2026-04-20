@@ -1,0 +1,14 @@
+{
+  "training_rows": 642,
+  "submitted_count": 145,
+  "dropped_count": 497,
+  "cv_roc_auc_mean": 0.6723,
+  "cv_roc_auc_std": 0.0506,
+  "opl_path": "/Users/rajnishpanwar/Downloads/OPL Sheet 2021_Nov21.xlsx",
+  "feature_count": 21,
+  "weights": {
+    "ml": 0.5,
+    "portfolio": 0.3,
+    "keywords": 0.2
+  }
+}

@@ -1,0 +1,206 @@
+{
+  "summary": {
+    "ok": false,
+    "generated_at": "2026-04-20T07:30:13.981893+00:00",
+    "cases": 8,
+    "passed": 6,
+    "failed": 2,
+    "pass_rate_pct": 75.0,
+    "failed_case_ids": [
+      "q01_undp_health_africa_only",
+      "q04_ec_climate_research"
+    ]
+  },
+  "cases": [
+    {
+      "id": "q01_undp_health_africa_only",
+      "query": "Show me only UNDP health consulting opportunities in Africa this month",
+      "passed": false,
+      "failures": [
+        "abstain_mismatch(expected=False,actual=True)"
+      ],
+      "has_abstain": true,
+      "has_sources_suffix": false,
+      "citations": [
+        1,
+        2
+      ],
+      "source_count": 2,
+      "top_source_sites": [
+        "UNDP",
+        "UNDP"
+      ],
+      "reply_preview": "Not found in retrieved tenders. I don't have enough grounded evidence to answer this reliably yet.\n\nTry narrowing by portal/sector/date, or ask me to show top matching tenders first."
+    },
+    {
+      "id": "q02_worldbank_governance_only",
+      "query": "Show me only World Bank governance advisory tenders",
+      "passed": true,
+      "failures": [],
+      "has_abstain": false,
+      "has_sources_suffix": true,
+      "citations": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "source_count": 15,
+      "top_source_sites": [
+        "World Bank",
+        "World Bank",
+        "World Bank",
+        "World Bank",
+        "World Bank"
+      ],
+      "reply_preview": "Top grounded matches from retrieved tenders:\n\n1. Hiring of Consultancy Services for Industrial Emission Baseline, Fuel Mix Assessment and Regulatory Compliance Review \u2014 World Bank (World Bank) | sector: governance | region: South Asia | fit: 100/100 | priority"
+    },
+    {
+      "id": "q03_ungm_nutrition",
+      "query": "List UNGM consulting opportunities for nutrition and public health",
+      "passed": true,
+      "failures": [],
+      "has_abstain": false,
+      "has_sources_suffix": true,
+      "citations": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "source_count": 14,
+      "top_source_sites": [
+        "UNGM",
+        "UNGM",
+        "UNGM",
+        "UNGM",
+        "UNGM"
+      ],
+      "reply_preview": "Top grounded matches from retrieved tenders:\n\n1. Rehabilitation and Climate-Resilient Upgrading of Essential Infrastructure in Primary Health Care Centers (PHCs) , with focus on Climate-Resilient WASH Systems. \u2014 UNICEF (UNGM) | sector: health | region: Africa "
+    },
+    {
+      "id": "q04_ec_climate_research",
+      "query": "Find EC climate change research consulting tenders",
+      "passed": false,
+      "failures": [
+        "cited_portal_mismatch(expected~EC)"
+      ],
+      "has_abstain": false,
+      "has_sources_suffix": true,
+      "citations": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "source_count": 15,
+      "top_source_sites": [
+        "World Bank",
+        "unknown",
+        "World Bank",
+        "World Bank",
+        "World Bank"
+      ],
+      "reply_preview": "Top grounded matches from retrieved tenders:\n\n1. M&E consultant \u2014 World Bank (World Bank) | sector: digital | region: South Asia | fit: 100/100 | priority: 85/100\n2. Hiring of Consultancy Services for Industrial Emission Baseline, Fuel Mix Assessment and Regul"
+    },
+    {
+      "id": "q05_ted_education_policy",
+      "query": "Show TED-EU education policy advisory opportunities",
+      "passed": true,
+      "failures": [],
+      "has_abstain": false,
+      "has_sources_suffix": true,
+      "citations": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "source_count": 15,
+      "top_source_sites": [
+        "TED-EU",
+        "TED-EU",
+        "TED-EU",
+        "TED-EU",
+        "TED-EU"
+      ],
+      "reply_preview": "Top grounded matches from retrieved tenders:\n\n1. N\u00e9metorsz\u00e1g \u2013 K\u00fclf\u00f6ldi gazdas\u00e1gi seg\u00edts\u00e9ggel kapcsolatos szolg\u00e1ltat\u00e1sok \u2013 81318103 - Third Party Monitoring (TPM) of GIZ MHPSS projects inside Syria \u2014 GIZ (TED-EU) | sector: governance | region: Middle East | fi"
+    },
+    {
+      "id": "q06_wash_south_asia",
+      "query": "Urgent WASH consulting tenders in South Asia",
+      "passed": true,
+      "failures": [],
+      "has_abstain": false,
+      "has_sources_suffix": true,
+      "citations": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "source_count": 20,
+      "top_source_sites": [
+        "World Bank",
+        "unknown",
+        "World Bank",
+        "World Bank",
+        "unknown"
+      ],
+      "reply_preview": "Top grounded matches from retrieved tenders:\n\n1. M&E consultant \u2014 World Bank (World Bank) | sector: digital | region: South Asia | fit: 100/100 | priority: 85/100\n2. Hiring of Consultancy Services for Industrial Emission Baseline, Fuel Mix Assessment and Regul"
+    },
+    {
+      "id": "q07_mel_africa",
+      "query": "Top monitoring and evaluation tenders in Africa this month",
+      "passed": true,
+      "failures": [],
+      "has_abstain": false,
+      "has_sources_suffix": true,
+      "citations": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "source_count": 15,
+      "top_source_sites": [
+        "World Bank",
+        "unknown",
+        "unknown",
+        "World Bank",
+        "unknown"
+      ],
+      "reply_preview": "Top grounded matches from retrieved tenders:\n\n1. procurement of Project end line Evaluation \u2014 World Bank (World Bank) | sector: agriculture | region: Africa | fit: 100/100 | priority: 80/100\n2. To Conduct Environmental and Social Impact Assessment (ESIA) Studi"
+    },
+    {
+      "id": "q08_infra_karnataka_only",
+      "query": "Show me only Karnataka civil works tenders",
+      "passed": true,
+      "failures": [],
+      "has_abstain": false,
+      "has_sources_suffix": true,
+      "citations": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "source_count": 15,
+      "top_source_sites": [
+        "Karnataka",
+        "Karnataka",
+        "Karnataka",
+        "Karnataka",
+        "Karnataka"
+      ],
+      "reply_preview": "Top grounded matches from retrieved tenders:\n\n1. Maintenance of Secondyear old Road side Monsoon Plantation from Adagur Harangi Bridge - Honnapura of 2 Km at Periyapatna Social Forestry Range during 2026-27 \u2014 Karnataka Forest Department \u2014 KFD ACF Social Forest"
+    }
+  ]
+}

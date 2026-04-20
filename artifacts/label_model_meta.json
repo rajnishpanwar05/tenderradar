@@ -1,0 +1,105 @@
+{
+  "trained_at": "2026-04-17T07:03:57Z",
+  "n_samples": 284,
+  "label_distribution": {
+    "Relevant": 25,
+    "Borderline": 75,
+    "Irrelevant": 184
+  },
+  "cv_summary": {
+    "Irrelevant": {
+      "precision": 0.71,
+      "recall": 0.837,
+      "f1": 0.768,
+      "support": 184
+    },
+    "Borderline": {
+      "precision": 0.444,
+      "recall": 0.32,
+      "f1": 0.372,
+      "support": 75
+    },
+    "Relevant": {
+      "precision": 0.231,
+      "recall": 0.12,
+      "f1": 0.158,
+      "support": 25
+    },
+    "accuracy": 0.637,
+    "macro_f1": 0.433
+  },
+  "confusion_matrix": [
+    [
+      154,
+      24,
+      6
+    ],
+    [
+      47,
+      24,
+      4
+    ],
+    [
+      16,
+      6,
+      3
+    ]
+  ],
+  "feature_importance_top10": [
+    [
+      "existing_relevance_score_norm",
+      0.2982
+    ],
+    [
+      "existing_priority_score_norm",
+      0.1394
+    ],
+    [
+      "multi_service_signal_count",
+      0.0593
+    ],
+    [
+      "sec_governance",
+      0.055
+    ],
+    [
+      "sec_environment_forestry",
+      0.0455
+    ],
+    [
+      "maturity_signal_first",
+      0.0436
+    ],
+    [
+      "sec_education",
+      0.0421
+    ],
+    [
+      "svc_evaluation",
+      0.0411
+    ],
+    [
+      "svc_capacity_building",
+      0.0373
+    ],
+    [
+      "ic_role_detected",
+      0.0331
+    ]
+  ],
+  "model_params": {
+    "n_estimators": 100,
+    "max_depth": 3,
+    "learning_rate": 0.1,
+    "subsample": 0.8
+  },
+  "n_features": 27,
+  "blend_weight": 0.35,
+  "approved_only": true,
+  "ai_fallback_enabled": false,
+  "approved_rows_used": 284,
+  "label_source_counts": {
+    "human": 284,
+    "ai": 0
+  }
+}

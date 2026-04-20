@@ -1,0 +1,34 @@
+{
+  "feedback_quality": {
+    "window_days": 14,
+    "since_utc": "2026-03-25T16:01:32.076532Z",
+    "answers": 12,
+    "avg_latency_ms": 5198.1,
+    "abstains": 0,
+    "ratings": [],
+    "failure_labels": [],
+    "weak_query_types": [],
+    "recommended_actions": []
+  },
+  "grounding_quality": {
+    "window_days": 14,
+    "since_utc": "2026-03-25T16:01:32.090061Z",
+    "events": 12,
+    "avg_latency_ms": 5198.1,
+    "fact_queries": 9,
+    "with_citations": 12,
+    "citation_presence_pct": 100.0,
+    "citation_validity_pct": 100.0,
+    "fact_query_grounding_compliance_pct": 100.0,
+    "zero_retrieval_cases": 0,
+    "zero_retrieval_abstain_pct": 0.0,
+    "uncited_numeric_claims": 0,
+    "uncited_numeric_claim_rate_pct": 0.0,
+    "risky_examples": [],
+    "recommended_actions": [
+      "Tighten abstain policy if fact_query_grounding_compliance_pct < 95.",
+      "Inspect risky_examples and add citation-required guardrails for numeric claims.",
+      "Increase retrieval evidence depth for query types with low citation presence."
+    ]
+  }
+}

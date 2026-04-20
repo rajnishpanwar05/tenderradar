@@ -1,0 +1,530 @@
+{
+  "_meta": {
+    "source": "Capability Statement — 184 international development projects",
+    "generated": "2026-03-24",
+    "purpose": "CAP STAT-derived keyword intelligence for tender scoring. Loaded by keywords.py Layer 5+."
+  },
+
+  "core_service_keywords": {
+    "_doc": "IDCG's primary service lines extracted from 184 project descriptions. High-weight signals.",
+    "baseline_endline": {
+      "keywords": [
+        "baseline survey", "baseline study", "baseline assessment",
+        "endline survey", "endline study", "endline assessment",
+        "end-line survey", "end-line assessment",
+        "baseline and endline", "pre-post assessment",
+        "baseline data collection"
+      ],
+      "weight": 18
+    },
+    "impact_evaluation": {
+      "keywords": [
+        "impact evaluation", "impact assessment", "impact study",
+        "quasi-experimental", "difference in difference",
+        "propensity score matching", "counterfactual",
+        "randomized control trial", "rct", "experimental design",
+        "attribution analysis", "contribution analysis"
+      ],
+      "weight": 16
+    },
+    "third_party_monitoring": {
+      "keywords": [
+        "third party monitoring", "tpm", "independent monitoring",
+        "independent verification", "independent verification agency",
+        "iva", "concurrent monitoring", "real-time monitoring",
+        "rtm", "field verification", "spot check",
+        "output verification", "process monitoring"
+      ],
+      "weight": 18
+    },
+    "programme_evaluation": {
+      "keywords": [
+        "programme evaluation", "program evaluation",
+        "project evaluation", "final evaluation",
+        "mid-term evaluation", "mid-term review",
+        "mid term review", "formative evaluation",
+        "summative evaluation", "performance evaluation",
+        "performance review", "terminal evaluation",
+        "completion evaluation", "ex-post evaluation"
+      ],
+      "weight": 15
+    },
+    "needs_assessment": {
+      "keywords": [
+        "needs assessment", "rapid assessment",
+        "rapid needs assessment", "situational analysis",
+        "situation analysis", "gap analysis",
+        "vulnerability assessment", "capacity needs assessment",
+        "institutional assessment", "organizational assessment",
+        "diagnostic study", "sector assessment"
+      ],
+      "weight": 14
+    },
+    "me_framework": {
+      "keywords": [
+        "m&e framework", "monitoring and evaluation framework",
+        "results framework", "logical framework",
+        "logframe", "theory of change",
+        "results chain", "indicator development",
+        "m&e system", "m&e plan", "monitoring plan",
+        "results-based management", "rbm",
+        "performance monitoring plan", "pmp"
+      ],
+      "weight": 14
+    },
+    "capacity_building": {
+      "keywords": [
+        "capacity building", "capacity development",
+        "capacity strengthening", "institutional strengthening",
+        "organizational development", "training of trainers",
+        "tot", "skills development", "competency building",
+        "systems strengthening", "capacity assessment",
+        "mentoring and coaching", "hand-holding support"
+      ],
+      "weight": 12
+    },
+    "data_collection_research": {
+      "keywords": [
+        "data collection", "primary data collection",
+        "household survey", "sample survey",
+        "kap survey", "knowledge attitude practice",
+        "kap study", "customer satisfaction survey",
+        "beneficiary assessment", "beneficiary feedback",
+        "perception survey", "tracer study",
+        "longitudinal study", "panel survey",
+        "cross-sectional survey", "mixed methods",
+        "qualitative research", "quantitative research",
+        "fgd", "focus group discussion",
+        "key informant interview", "kii",
+        "in-depth interview", "idi",
+        "stakeholder consultation"
+      ],
+      "weight": 12
+    },
+    "technical_assistance": {
+      "keywords": [
+        "technical assistance", "technical advisory",
+        "technical support", "technical consultancy",
+        "advisory services", "expert services",
+        "consulting services", "consultancy services",
+        "professional services"
+      ],
+      "weight": 13
+    },
+    "policy_strategy": {
+      "keywords": [
+        "policy development", "policy review",
+        "policy analysis", "policy recommendation",
+        "strategy development", "strategic planning",
+        "strategic framework", "roadmap development",
+        "action plan development", "sector strategy",
+        "policy dialogue", "policy brief"
+      ],
+      "weight": 11
+    }
+  },
+
+  "sector_keywords": {
+    "_doc": "IDCG sectors from 184 projects with CAP STAT-specific sub-themes.",
+    "agriculture_livelihoods": {
+      "keywords": [
+        "agriculture", "agricultural", "farmer", "farming",
+        "crop", "horticulture", "fisheries", "animal husbandry",
+        "dairy", "livestock", "poultry", "sericulture",
+        "food security", "food systems", "nutrition security",
+        "value chain", "agri-value chain", "market linkage",
+        "fpo", "farmer producer organization",
+        "organic farming", "sustainable agriculture",
+        "climate-smart agriculture", "precision agriculture",
+        "irrigation", "watershed", "watershed management",
+        "livelihood", "livelihoods", "rural livelihoods",
+        "tribal livelihood", "forest-based livelihood",
+        "ntfp", "non-timber forest produce",
+        "cold chain", "post-harvest", "mandi",
+        "kisan", "agri-business", "seed systems"
+      ],
+      "weight": 10
+    },
+    "education_skills": {
+      "keywords": [
+        "education", "school", "learning", "literacy",
+        "numeracy", "foundational literacy", "foundational numeracy",
+        "fln", "nipun bharat", "early childhood",
+        "ece", "ecce", "pre-primary",
+        "teacher training", "teacher professional development",
+        "curriculum", "pedagogy", "textbook",
+        "vocational", "tvet", "skill development",
+        "iti", "polytechnic", "apprenticeship",
+        "dropout", "enrolment", "retention",
+        "school management", "samagra shiksha",
+        "midday meal", "pm poshan",
+        "digital learning", "edtech",
+        "higher education", "scholarship",
+        "inclusive education", "special education",
+        "adult literacy", "non-formal education"
+      ],
+      "weight": 10
+    },
+    "health_nutrition": {
+      "keywords": [
+        "health", "public health", "health system",
+        "health facility", "hospital", "phc",
+        "primary health care", "community health",
+        "maternal health", "child health", "rmnch+a",
+        "reproductive health", "family planning",
+        "immunization", "vaccination", "universal immunization",
+        "nutrition", "malnutrition", "stunting", "wasting",
+        "anemia", "micronutrient", "complementary feeding",
+        "icds", "poshan abhiyaan", "anganwadi",
+        "asha", "accredited social health activist",
+        "nrhm", "nhm", "national health mission",
+        "disease surveillance", "epidemic", "pandemic",
+        "tuberculosis", "tb", "malaria", "hiv", "aids",
+        "mental health", "nmhp", "substance abuse",
+        "health insurance", "ayushman bharat"
+      ],
+      "weight": 10
+    },
+    "wash": {
+      "keywords": [
+        "water", "sanitation", "wash", "hygiene",
+        "drinking water", "water supply", "piped water",
+        "water quality", "groundwater", "borehole",
+        "hand pump", "tube well",
+        "jal jeevan", "jjm", "har ghar jal",
+        "sewage", "sewerage", "wastewater",
+        "swachh bharat", "sbm", "odf",
+        "open defecation", "toilet", "latrine",
+        "fecal sludge", "septage management",
+        "water resource management", "cwrm",
+        "fluoride", "arsenic", "water treatment",
+        "menstrual hygiene", "mhm"
+      ],
+      "weight": 10
+    },
+    "climate_environment": {
+      "keywords": [
+        "climate", "climate change", "climate action",
+        "climate adaptation", "climate mitigation",
+        "climate resilience", "climate finance",
+        "environment", "environmental", "ecosystem",
+        "biodiversity", "conservation", "wildlife",
+        "forest", "forestry", "afforestation",
+        "reforestation", "deforestation", "redd+",
+        "carbon", "carbon credit", "emission",
+        "greenhouse gas", "ghg", "net zero",
+        "disaster risk", "drr", "disaster management",
+        "flood", "drought", "cyclone",
+        "coastal zone", "mangrove", "wetland",
+        "natural resource management", "nrm",
+        "environmental impact assessment", "eia",
+        "esia", "environmental audit",
+        "pollution", "air quality",
+        "land degradation", "desertification",
+        "circular economy", "waste management"
+      ],
+      "weight": 10
+    },
+    "energy_power": {
+      "keywords": [
+        "energy", "renewable energy", "solar",
+        "wind energy", "biomass", "biogas",
+        "clean energy", "energy transition",
+        "energy efficiency", "energy audit",
+        "off-grid", "mini-grid", "microgrid",
+        "electrification", "rural electrification",
+        "power sector", "electricity",
+        "transmission", "distribution",
+        "smart metering", "net metering",
+        "decarbonization", "just energy transition",
+        "clean cooking", "improved cookstove"
+      ],
+      "weight": 10
+    },
+    "governance": {
+      "keywords": [
+        "governance", "good governance",
+        "public administration", "institutional reform",
+        "decentralization", "panchayati raj",
+        "e-governance", "digital governance",
+        "public finance management", "pfm",
+        "fiscal", "budget", "expenditure tracking",
+        "accountability", "transparency", "social accountability",
+        "right to information", "rti",
+        "anti-corruption", "grievance redressal",
+        "citizen engagement", "participatory governance",
+        "rule of law", "justice sector",
+        "public service delivery", "service delivery"
+      ],
+      "weight": 8
+    },
+    "gender_inclusion": {
+      "keywords": [
+        "gender", "gender equality", "gender equity",
+        "gender mainstreaming", "gender analysis",
+        "gender assessment", "gender audit",
+        "women empowerment", "women's empowerment",
+        "girl", "adolescent girl",
+        "gender-based violence", "gbv", "domestic violence",
+        "child protection", "child labour",
+        "social inclusion", "inclusion",
+        "disability", "persons with disabilities", "pwd",
+        "marginalized", "vulnerable", "indigenous",
+        "tribal", "scheduled tribe", "scheduled caste",
+        "minority", "lgbtq", "transgender",
+        "social safeguards", "resettlement",
+        "safeguarding", "protection"
+      ],
+      "weight": 8
+    }
+  },
+
+  "methodology_keywords": {
+    "_doc": "Research methodologies from IDCG's 184 projects — signal strong M&E/research fit.",
+    "keywords": [
+      "mixed methods", "quasi-experimental", "experimental design",
+      "randomized control trial", "rct",
+      "difference in difference", "did", "diff-in-diff",
+      "propensity score matching", "psm",
+      "regression discontinuity", "instrumental variable",
+      "capi", "computer assisted personal interview",
+      "cati", "computer assisted telephone interview",
+      "odk", "kobo", "survey cto", "commcare",
+      "gis", "geographic information system", "remote sensing",
+      "satellite imagery", "geospatial",
+      "most significant change", "msc",
+      "outcome harvesting", "outcome mapping",
+      "participatory rural appraisal", "pra",
+      "rapid rural appraisal", "rra",
+      "cost-benefit analysis", "cost-effectiveness",
+      "value for money", "vfm",
+      "social return on investment", "sroi",
+      "stakeholder mapping", "power analysis",
+      "sampling", "stratified sampling", "cluster sampling",
+      "probability proportional to size", "pps"
+    ],
+    "weight": 8
+  },
+
+  "client_keywords": {
+    "_doc": "IDCG's actual clients from 184 projects. Matching these = strong bid signal.",
+    "tier1_priority": {
+      "keywords": [
+        "world bank", "worldbank", "ibrd", "ida",
+        "giz", "deutsche gesellschaft",
+        "undp", "united nations development programme",
+        "fao", "food and agriculture organization",
+        "unicef", "united nations children's fund",
+        "usaid", "united states agency",
+        "afdb", "african development bank",
+        "adb", "asian development bank",
+        "european union", "eu delegation", "eu funded",
+        "fcdo", "dfid", "uk aid", "foreign commonwealth"
+      ],
+      "weight": 15
+    },
+    "tier2_strong": {
+      "keywords": [
+        "ifc", "international finance corporation",
+        "who", "world health organization",
+        "wfp", "world food programme",
+        "ifad", "international fund for agricultural development",
+        "unido", "united nations industrial development",
+        "un women", "unwomen",
+        "iom", "international organization for migration",
+        "unhcr", "un refugee",
+        "hans foundation", "the hans foundation",
+        "bill and melinda gates", "bmgf", "gates foundation",
+        "children's investment fund", "ciff",
+        "mastercard foundation",
+        "rockefeller foundation"
+      ],
+      "weight": 12
+    },
+    "tier3_known": {
+      "keywords": [
+        "pwc", "pricewaterhousecoopers",
+        "deloitte", "kpmg", "ernst young", "ey ",
+        "dalberg", "mckinsey", "boston consulting",
+        "niti aayog", "planning commission",
+        "afd", "agence francaise",
+        "sida", "swedish international",
+        "norad", "norwegian agency",
+        "jica", "japan international",
+        "koica", "korean international",
+        "ausaid", "australian aid",
+        "gavi", "global fund",
+        "green climate fund", "gcf",
+        "global environment facility", "gef"
+      ],
+      "weight": 8
+    }
+  },
+
+  "geography_keywords": {
+    "_doc": "Countries/regions from IDCG's 184 projects — stronger fit for proven geographies.",
+    "home_base": {
+      "keywords": [
+        "india", "indian", "new delhi", "delhi",
+        "rajasthan", "madhya pradesh", "chhattisgarh",
+        "jharkhand", "odisha", "bihar", "uttar pradesh",
+        "uttarakhand", "himachal pradesh", "assam",
+        "meghalaya", "nagaland", "manipur", "mizoram",
+        "tripura", "arunachal", "sikkim",
+        "maharashtra", "gujarat", "karnataka",
+        "tamil nadu", "andhra pradesh", "telangana",
+        "kerala", "west bengal", "punjab", "haryana"
+      ],
+      "weight": 7
+    },
+    "strong_presence": {
+      "keywords": [
+        "bangladesh", "nepal", "sri lanka", "pakistan",
+        "bhutan", "maldives", "afghanistan",
+        "kenya", "tanzania", "uganda", "ethiopia",
+        "rwanda", "mozambique", "zambia", "malawi",
+        "nigeria", "ghana", "senegal", "cameroon",
+        "south africa", "zimbabwe",
+        "cambodia", "myanmar", "vietnam",
+        "indonesia", "philippines", "timor-leste",
+        "south asia", "sub-saharan", "east africa",
+        "west africa", "southeast asia"
+      ],
+      "weight": 5
+    },
+    "emerging": {
+      "keywords": [
+        "tajikistan", "uzbekistan", "kyrgyzstan",
+        "jordan", "lebanon", "iraq", "yemen",
+        "egypt", "morocco", "tunisia",
+        "colombia", "peru", "bolivia", "haiti",
+        "papua new guinea", "fiji", "pacific islands",
+        "central asia", "middle east", "mena",
+        "latin america", "caribbean"
+      ],
+      "weight": 3
+    }
+  },
+
+  "negative_keywords": {
+    "_doc": "Hard-block signals — tenders matching these are NOT consulting and should score near zero.",
+    "hard_block": {
+      "_doc": "Score floor = 0. These are procurement/goods/works, never consulting.",
+      "keywords": [
+        "supply of goods", "procurement of goods",
+        "supply and delivery", "supply and installation",
+        "rate contract for supply", "purchase order",
+        "civil works contract", "construction of building",
+        "construction of road", "construction of bridge",
+        "earth work", "masonry work",
+        "laying of pipeline", "erection and commissioning",
+        "fabrication of", "manufacturing of",
+        "printing and binding", "printing of books",
+        "supply of stationery", "supply of furniture",
+        "supply of vehicle", "hiring of vehicle",
+        "supply of medicines", "supply of drugs",
+        "supply of equipment", "supply of machinery",
+        "supply of uniform", "supply of ration",
+        "catering services", "mess services",
+        "garbage collection", "sweeping services",
+        "installation of solar", "installation of panels",
+        "installation of transformer", "installation of pump",
+        "supply of solar", "supply of panels",
+        "supply of transformer", "supply of pump",
+        "supply of computer", "supply of laptop",
+        "supply of server", "supply of network",
+        "supply of generator", "supply of cable",
+        "electrification work", "wiring work",
+        "civil construction", "road construction",
+        "road widening", "road repair",
+        "bridge construction", "dam construction",
+        "building construction", "renovation of building",
+        "repair of road", "repair of building",
+        "white washing", "painting work",
+        "plumbing work", "electrical work",
+        "supply of pipes", "supply of valves",
+        "boring of well", "drilling of borehole",
+        "construction of toilet", "construction of school building",
+        "construction of health centre", "construction of anganwadi",
+        "supply of textbook", "supply of uniform",
+        "supply of mid day meal", "supply of food",
+        "supply of ambulance", "supply of mobile van",
+        "insurance policy", "group insurance",
+        "bank guarantee", "security deposit",
+        "empanelment of contractors", "empanelment of vendors",
+        "tender for works", "works contract",
+        "supply of ppe", "supply of kit",
+        "hiring of manpower", "deployment of manpower",
+        "outsourcing of services", "facility management"
+      ]
+    },
+    "strong_negative": {
+      "_doc": "Heavy penalty (-20 to -30). Professional services IDCG doesn't offer.",
+      "keywords": [
+        "law firm", "legal consultant", "legal advisory",
+        "legal services", "legal counsel", "advocate",
+        "empanelment of advocates", "panel of lawyers",
+        "chartered accountant", "ca firm", "statutory auditor",
+        "tax consultant", "company secretary", "cs firm",
+        "architecture firm", "architectural consultant",
+        "interior design", "landscape architect",
+        "software development", "app development",
+        "web development", "website design",
+        "erp implementation", "system integrator",
+        "it consultant", "it services",
+        "network installation", "cctv installation",
+        "manpower supply", "outsourcing of staff",
+        "security guard", "security services",
+        "housekeeping", "cleaning services",
+        "data entry operator", "stenographer",
+        "medical college", "dental college",
+        "laboratory reagent", "medical equipment"
+      ]
+    },
+    "moderate_negative": {
+      "_doc": "Moderate penalty (-8 to -15). Sometimes relevant but usually not IDCG's core.",
+      "keywords": [
+        "construction", "civil works",
+        "hardware", "equipment",
+        "vehicle", "machinery", "furniture",
+        "printing", "stationery",
+        "annual maintenance contract", "amc",
+        "repair and maintenance",
+        "vendor registration", "empanelment",
+        "expression of interest for empanelment",
+        "rate contract",
+        "computer", "laptop", "server",
+        "air conditioning", "generator",
+        "transformer", "electric pole"
+      ]
+    }
+  },
+
+  "idcg_differentiators": {
+    "_doc": "Unique IDCG strengths from CAP STAT that signal perfect-fit tenders.",
+    "keywords": [
+      "19 countries", "multi-country evaluation",
+      "cross-country study", "multi-state",
+      "large-scale survey", "large scale baseline",
+      "national level survey", "state level survey",
+      "district level survey",
+      "real-time monitoring", "concurrent monitoring",
+      "third party monitoring agency",
+      "independent verification agent",
+      "process documentation",
+      "social audit", "community scorecard",
+      "citizen report card",
+      "gender audit", "gender assessment",
+      "environmental and social assessment",
+      "esia consultant", "safeguards",
+      "resettlement action plan", "rap",
+      "tribal development", "indigenous peoples plan",
+      "grievance redressal mechanism", "grm",
+      "beneficiary feedback mechanism",
+      "management information system", "mis development",
+      "dashboard development", "data visualization",
+      "gis mapping", "geospatial analysis"
+    ],
+    "weight": 10
+  }
+}

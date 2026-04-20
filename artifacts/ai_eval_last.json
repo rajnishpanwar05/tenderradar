@@ -1,0 +1,209 @@
+{
+  "summary": {
+    "ok": true,
+    "generated_at": "2026-04-08T16:22:22.287498+00:00",
+    "gold_path": "artifacts/ai_eval_gold.jsonl",
+    "cases": 8,
+    "passed": 8,
+    "failed": 0,
+    "pass_rate_pct": 100.0,
+    "avg_score": 100.0,
+    "avg_query_ms": 559.9,
+    "failed_case_ids": [],
+    "runtime": {
+      "chromadb_available": true,
+      "mysql_connector_available": true
+    },
+    "environment_ready": true
+  },
+  "cases": [
+    {
+      "id": "africa_mel",
+      "query": "top 10 monitoring and evaluation tenders in africa this month",
+      "passed": true,
+      "score": 100.0,
+      "pass_score": 70,
+      "top_k": 10,
+      "total_results": 10,
+      "evidence_ratio_top_k": 1.0,
+      "required_token_hit": true,
+      "required_portal_hits": 0,
+      "required_sector_hits": 5,
+      "forbidden_token_hits": [],
+      "failures": [],
+      "query_ms": 4226.7,
+      "vector_candidates": 0,
+      "top_titles": [
+        "Firm to Automate the Environmental and Social Impact Assessment (ESIA) Process of the Environmental Protection Agency of Liberia.",
+        "Consultancy Service for Full Feasibility Study for Hybrid Mini-Grid Concessions in Nine State Capitals of South Sudan",
+        "Individual Consultant to Prepare Resettlement Action Plan for South Sudan Energy Sector Access and Institutional Strengthening Project",
+        "Independent Evaluation of the English language proficiency training ,assessment and certification programme for in-service teachers in RWAND",
+        "National Biodiversity Financing Needs Assessment Specialist"
+      ]
+    },
+    {
+      "id": "undp_health",
+      "query": "show me health consulting opportunities from undp",
+      "passed": true,
+      "score": 100.0,
+      "pass_score": 70,
+      "top_k": 8,
+      "total_results": 8,
+      "evidence_ratio_top_k": 1.0,
+      "required_token_hit": true,
+      "required_portal_hits": 8,
+      "required_sector_hits": 0,
+      "forbidden_token_hits": [],
+      "failures": [],
+      "query_ms": 21.6,
+      "vector_candidates": 0,
+      "top_titles": [
+        "UNDP- ; Mental Health and Psychosocial Support (MHPSS) trainings",
+        "UNDP- Research Analyst \u2013 Health",
+        "UNDP- Research Analyst- Information Technology\u2013 Health",
+        "Consultancy - Review of Drug-Resistant Tuberculosis (DR-TB)",
+        "REOI-Solar PV System and ICT Installation Works for Health Facilities in Zambia"
+      ]
+    },
+    {
+      "id": "wash_south_asia",
+      "query": "urgent water sanitation consulting tenders in south asia",
+      "passed": true,
+      "score": 100.0,
+      "pass_score": 70,
+      "top_k": 10,
+      "total_results": 10,
+      "evidence_ratio_top_k": 1.0,
+      "required_token_hit": true,
+      "required_portal_hits": 0,
+      "required_sector_hits": 3,
+      "forbidden_token_hits": [],
+      "failures": [],
+      "query_ms": 66.8,
+      "vector_candidates": 0,
+      "top_titles": [
+        "Consultancy Services for Strategic Road Sectoral Environmental and Social Assessment",
+        "UNDP- Research Analyst-Environment & Climate Resilience",
+        "Consultancy Services for Environmental and Social Infrastructure Assessments Phase 1 and 2",
+        "81320252-Strategic environmental and social assessment of the mining sector (SESA) to be carried out in the DRC",
+        "10001930-Empirical Study on Effective Climate Policy Measures in India"
+      ]
+    },
+    {
+      "id": "worldbank_governance",
+      "query": "world bank governance and public policy advisory tenders",
+      "passed": true,
+      "score": 100.0,
+      "pass_score": 70,
+      "top_k": 10,
+      "total_results": 10,
+      "evidence_ratio_top_k": 1.0,
+      "required_token_hit": true,
+      "required_portal_hits": 10,
+      "required_sector_hits": 0,
+      "forbidden_token_hits": [],
+      "failures": [],
+      "query_ms": 21.5,
+      "vector_candidates": 0,
+      "top_titles": [
+        "Consultancy Service for Full Feasibility Study for Hybrid Mini-Grid Concessions in Nine State Capitals of South Sudan",
+        "Consultancy services for E&S Assessment for BESS Study",
+        "Hiring of Monitoring & Evaluation Consultancy Firm for Component A (Flood Management of Kachhi Plain) Under BWSPIP",
+        "Consultancy Services for Feasibility Studies and Technical Design for Fish Landing Jetties at Kismayo, Warsheikh and Jazeera",
+        "Individual Consultant to Prepare Resettlement Action Plan for South Sudan Energy Sector Access and Institutional Strengthening Project"
+      ]
+    },
+    {
+      "id": "education_recent",
+      "query": "recent education and skill development consulting opportunities",
+      "passed": true,
+      "score": 100.0,
+      "pass_score": 70,
+      "top_k": 10,
+      "total_results": 6,
+      "evidence_ratio_top_k": 1.0,
+      "required_token_hit": true,
+      "required_portal_hits": 0,
+      "required_sector_hits": 6,
+      "forbidden_token_hits": [],
+      "failures": [],
+      "query_ms": 26.1,
+      "vector_candidates": 0,
+      "top_titles": [
+        "Strengthening Digital Governance for School Education in Assam : Shiksha Setu 2.0",
+        "Consultancy services for Institutionalization of the academic supervision and mentoring process for primary school teachers at cluster level",
+        "Provision of Customization, Hosting, Maintenance and Technical Support of an Open-source Learning Management System (LMS) for Capacity Build",
+        "UNDP- ; Gender Equality & Importance of Education Trainings",
+        "Recrutement du cabinet charg\u00e9 de r\u00e9aliser l\u2019audit externe du Programme Transformer le Secteur de l\u2019Education pour de Meilleurs R\u00e9sultats et "
+      ]
+    },
+    {
+      "id": "undp_only_health_africa",
+      "query": "show me only undp health consulting opportunities in africa",
+      "passed": true,
+      "score": 100.0,
+      "pass_score": 75,
+      "top_k": 8,
+      "total_results": 1,
+      "evidence_ratio_top_k": 1.0,
+      "required_token_hit": true,
+      "required_portal_hits": 1,
+      "required_sector_hits": 0,
+      "forbidden_token_hits": [],
+      "failures": [],
+      "query_ms": 19.9,
+      "vector_candidates": 0,
+      "top_titles": [
+        "REOI-Solar PV System and ICT Installation Works for Health Facilities in Zambia"
+      ]
+    },
+    {
+      "id": "consulting_no_infra_noise",
+      "query": "top consulting tenders in health and education",
+      "passed": true,
+      "score": 100.0,
+      "pass_score": 75,
+      "top_k": 8,
+      "total_results": 6,
+      "evidence_ratio_top_k": 1.0,
+      "required_token_hit": true,
+      "required_portal_hits": 0,
+      "required_sector_hits": 6,
+      "forbidden_token_hits": [],
+      "failures": [],
+      "query_ms": 54.0,
+      "vector_candidates": 0,
+      "top_titles": [
+        "Support for a multilateral initiative on climate change and health research",
+        "Strengthening Digital Governance for School Education in Assam : Shiksha Setu 2.0",
+        "Consultancy services for Institutionalization of the academic supervision and mentoring process for primary school teachers at cluster level",
+        "Provision of Customization, Hosting, Maintenance and Technical Support of an Open-source Learning Management System (LMS) for Capacity Build",
+        "UNDP- ; Gender Equality & Importance of Education Trainings"
+      ]
+    },
+    {
+      "id": "karnataka_infra_only",
+      "query": "show me only karnataka civil works tenders",
+      "passed": true,
+      "score": 100.0,
+      "pass_score": 70,
+      "top_k": 8,
+      "total_results": 8,
+      "evidence_ratio_top_k": 1.0,
+      "required_token_hit": true,
+      "required_portal_hits": 8,
+      "required_sector_hits": 0,
+      "forbidden_token_hits": [],
+      "failures": [],
+      "query_ms": 42.6,
+      "vector_candidates": 0,
+      "top_titles": [
+        "Providing Project management Consultancy services for the work of Comprehensive Development of Road Drains and providing Water Supply and ot",
+        "Raising of Monsoon roadside Plantation from Kanakapura Cross to Uppalla Bridge of Sandur SF 3KM (unit-38) (CALL-04)",
+        "MAINTENANCE OF THIRTD YEAR ROADSIDE PLANTATION AT ANTARAGANGE GREVEYARD BACKSIDE CHANNEL BRIDGE TO KENCHAMMANAHALLI CHANNEL SIDE 3.4 KM IN S",
+        "MAINTENANCE OF 2 ND YEAR ROADSIDE PLANTATION AT ABBALAGERE GOVT HOUSING BOARD ORGANIZATION MUTTODU PREMISES 6.04 KM IN SHIMOGA RANGE",
+        "Raising of Monsoon roadside Plantation from Sheliyappanahalli to K.Huliraja Sheshagiri Rao Farm Sy No.312 Bridge of Sandur SF 3KM (unit-35)("
+      ]
+    }
+  ]
+}

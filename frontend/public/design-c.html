@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Design C — Radar Intelligence</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap');
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Space Grotesk',sans-serif;background:#0D0F14;color:#C9D1D9;min-height:100vh;display:flex}
+
+  .sidebar{width:200px;background:#13161C;border-right:1px solid #21262D;padding:0;display:flex;flex-direction:column;flex-shrink:0}
+  .logo{padding:22px 20px;font-weight:700;font-size:16px;letter-spacing:-0.3px;border-bottom:1px solid #21262D;display:flex;align-items:center;gap:8px}
+  .logo-icon{width:28px;height:28px;background:linear-gradient(135deg,#F59E0B,#EF4444);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:14px}
+  .logo-text{color:#F0F6FC}
+  .logo-text span{color:#F59E0B}
+  .nav{padding:12px 8px;flex:1}
+  .nav-item{display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:6px;cursor:pointer;font-size:12px;font-weight:500;color:#8B949E;margin-bottom:2px;transition:all 0.1s}
+  .nav-item:hover{background:#21262D;color:#C9D1D9}
+  .nav-item.active{background:#21262D;color:#F59E0B;font-weight:600}
+  .nav-item.active::before{content:'';width:3px;height:16px;background:#F59E0B;border-radius:2px;margin-left:-4px;margin-right:4px}
+  .nav-item svg{width:14px;height:14px;flex-shrink:0}
+  .nav-count{background:#F59E0B20;color:#F59E0B;font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:600;padding:1px 6px;border-radius:3px;margin-left:auto}
+  .sidebar-status{padding:16px 20px;border-top:1px solid #21262D;font-size:10px;color:#484F58;font-family:'JetBrains Mono',monospace}
+  .status-dot{display:inline-block;width:6px;height:6px;background:#3FB950;border-radius:50%;margin-right:5px}
+
+  .main{flex:1;display:flex;flex-direction:column;overflow:hidden}
+
+  .topbar{background:#13161C;border-bottom:1px solid #21262D;padding:14px 28px;display:flex;align-items:center;gap:14px}
+  .breadcrumb{font-size:11px;color:#484F58;font-family:'JetBrains Mono',monospace;flex:1}
+  .breadcrumb span{color:#F59E0B}
+  .search-box{display:flex;align-items:center;gap:8px;background:#0D0F14;border:1px solid #30363D;border-radius:6px;padding:6px 12px;width:240px}
+  .search-box input{background:none;border:none;outline:none;color:#C9D1D9;font-size:12px;width:100%;font-family:'Space Grotesk',sans-serif}
+  .search-box input::placeholder{color:#484F58}
+  .kbd{background:#21262D;border:1px solid #30363D;border-radius:4px;padding:1px 5px;font-size:10px;color:#8B949E;font-family:'JetBrains Mono',monospace}
+  .sync-badge{display:flex;align-items:center;gap:6px;background:#1C2128;border:1px solid #30363D;border-radius:6px;padding:5px 12px;font-size:11px;font-family:'JetBrains Mono',monospace;color:#3FB950}
+  .pulse{width:6px;height:6px;background:#3FB950;border-radius:50%;animation:pulse 2s infinite}
+  @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.5;transform:scale(1.3)}}
+
+  .body{padding:24px 28px;overflow-y:auto;flex:1}
+
+  .greeting{margin-bottom:24px}
+  .greeting h1{font-size:24px;font-weight:700;color:#F0F6FC;letter-spacing:-0.5px}
+  .greeting h1 span{color:#F59E0B}
+  .greeting p{font-size:12px;color:#484F58;margin-top:4px;font-family:'JetBrains Mono',monospace}
+
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:24px}
+  .stat{background:#13161C;border:1px solid #21262D;border-radius:8px;padding:16px;position:relative;overflow:hidden;cursor:pointer;transition:border-color 0.15s}
+  .stat:hover{border-color:#F59E0B}
+  .stat-num{font-family:'JetBrains Mono',monospace;font-size:26px;font-weight:600;letter-spacing:-1px;margin-bottom:4px}
+  .stat-num.amber{color:#F59E0B}
+  .stat-num.green{color:#3FB950}
+  .stat-num.blue{color:#58A6FF}
+  .stat-num.red{color:#FF7B72}
+  .stat-lbl{font-size:10px;color:#484F58;text-transform:uppercase;letter-spacing:0.8px;font-weight:600}
+  .stat-corner{position:absolute;top:12px;right:14px;font-size:18px;opacity:0.5}
+  .stat-delta{font-size:10px;color:#3FB950;font-family:'JetBrains Mono',monospace;margin-top:6px}
+
+  .grid{display:grid;grid-template-columns:1fr 340px;gap:16px}
+
+  .panel{background:#13161C;border:1px solid #21262D;border-radius:8px;overflow:hidden}
+  .panel-header{padding:12px 18px;border-bottom:1px solid #21262D;display:flex;align-items:center;justify-content:space-between;background:#0D0F14}
+  .panel-title{font-size:11px;font-weight:600;color:#8B949E;text-transform:uppercase;letter-spacing:1px;display:flex;align-items:center;gap:6px}
+  .panel-title::before{content:'//';color:#F59E0B;font-family:'JetBrains Mono',monospace}
+  .panel-action{font-size:11px;color:#58A6FF;cursor:pointer;font-family:'JetBrains Mono',monospace}
+
+  table{width:100%;border-collapse:collapse}
+  thead th{padding:8px 18px;font-size:9px;font-weight:700;color:#484F58;text-transform:uppercase;letter-spacing:1px;text-align:left;border-bottom:1px solid #21262D}
+  tbody tr{border-bottom:1px solid #161B22;cursor:pointer;transition:background 0.1s}
+  tbody tr:last-child{border-bottom:none}
+  tbody tr:hover{background:#1C2128}
+  td{padding:11px 18px;font-size:12px;vertical-align:middle}
+  .portal-tag{font-size:9px;font-weight:700;letter-spacing:0.5px;padding:2px 7px;border-radius:3px;text-transform:uppercase;font-family:'JetBrains Mono',monospace}
+  .t-wb{background:#1F3A5F40;color:#58A6FF;border:1px solid #58A6FF30}
+  .t-ungm{background:#5A189A20;color:#C77DFF;border:1px solid #C77DFF30}
+  .t-gem{background:#3FB95020;color:#3FB950;border:1px solid #3FB95030}
+  .t-giz{background:#F59E0B20;color:#F59E0B;border:1px solid #F59E0B30}
+  .score-mono{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:600;color:#F59E0B}
+  .fit-g{color:#3FB950;font-size:10px;font-weight:600;font-family:'JetBrains Mono',monospace}
+  .fit-f{color:#F59E0B;font-size:10px;font-weight:600;font-family:'JetBrains Mono',monospace}
+  .fit-l{color:#FF7B72;font-size:10px;font-weight:600;font-family:'JetBrains Mono',monospace}
+  .t-title{font-size:12px;color:#C9D1D9;font-weight:500;line-height:1.4;max-width:280px}
+  .t-org{font-size:10px;color:#484F58;margin-top:2px;font-family:'JetBrains Mono',monospace}
+
+  .right-col{display:flex;flex-direction:column;gap:14px}
+
+  /* Chat panel */
+  .chat-panel{background:#13161C;border:1px solid #21262D;border-radius:8px;overflow:hidden;flex:1}
+  .chat-panel-header{background:#1C2128;border-bottom:1px solid #21262D;padding:12px 16px;display:flex;align-items:center;gap:10px}
+  .chat-avatar{width:30px;height:30px;background:linear-gradient(135deg,#F59E0B,#EF4444);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+  .chat-meta h4{font-size:12px;font-weight:600;color:#F0F6FC}
+  .chat-meta p{font-size:10px;color:#484F58;font-family:'JetBrains Mono',monospace}
+  .online{width:7px;height:7px;background:#3FB950;border-radius:50%;margin-left:auto}
+  .chat-body{padding:16px}
+  .chat-suggest{background:#1C2128;border:1px solid #30363D;border-radius:6px;padding:8px 12px;font-size:11px;color:#8B949E;cursor:pointer;margin-bottom:8px;transition:all 0.1s;line-height:1.4}
+  .chat-suggest:hover{border-color:#F59E0B;color:#F0F6FC}
+  .chat-input-row{display:flex;gap:8px;padding:12px 16px;border-top:1px solid #21262D}
+  .chat-input{flex:1;background:#0D0F14;border:1px solid #30363D;border-radius:6px;padding:8px 12px;color:#C9D1D9;font-size:12px;font-family:'Space Grotesk',sans-serif;outline:none}
+  .chat-input:focus{border-color:#F59E0B}
+  .chat-input::placeholder{color:#484F58}
+  .chat-send-btn{background:#F59E0B;border:none;border-radius:6px;padding:8px 12px;cursor:pointer;font-size:14px}
+
+  /* Portal health */
+  .health-panel{background:#13161C;border:1px solid #21262D;border-radius:8px;overflow:hidden}
+  .portal-item{display:flex;align-items:center;padding:10px 16px;border-bottom:1px solid #161B22;gap:10px}
+  .portal-item:last-child{border-bottom:none}
+  .h-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+  .h-name{font-size:11px;font-weight:500;color:#C9D1D9;flex:1}
+  .h-count{font-size:10px;color:#484F58;font-family:'JetBrains Mono',monospace;margin-right:4px}
+  .h-bar-wrap{width:60px;height:3px;background:#21262D;border-radius:2px;overflow:hidden}
+  .h-bar{height:100%;border-radius:2px}
+
+  .deadline-pill{background:#EF444420;color:#FF7B72;font-size:9px;font-weight:700;padding:2px 6px;border-radius:3px;font-family:'JetBrains Mono',monospace}
+</style>
+</head>
+<body>
+
+<div class="sidebar">
+  <div class="logo">
+    <div class="logo-icon">⚡</div>
+    <div class="logo-text">Tender<span>Radar</span></div>
+  </div>
+  <nav class="nav">
+    <div class="nav-item active">
+      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><rect x="3" y="3" width="7" height="7" stroke-width="2" rx="1"/><rect x="14" y="3" width="7" height="7" stroke-width="2" rx="1"/><rect x="3" y="14" width="7" height="7" stroke-width="2" rx="1"/><rect x="14" y="14" width="7" height="7" stroke-width="2" rx="1"/></svg>
+      Overview
+    </div>
+    <div class="nav-item">
+      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h10"/></svg>
+      Tenders
+      <span class="nav-count">23k</span>
+    </div>
+    <div class="nav-item">
+      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+      AI Chat
+    </div>
+    <div class="nav-item">
+      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+      Analytics
+    </div>
+    <div class="nav-item">
+      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 0v10"/></svg>
+      Pipeline
+    </div>
+    <div class="nav-item">
+      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><circle cx="12" cy="12" r="3" stroke-width="2"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+      Portals
+      <span class="nav-count">19</span>
+    </div>
+  </nav>
+  <div class="sidebar-status"><span class="status-dot"></span>All systems nominal</div>
+</div>
+
+<div class="main">
+  <div class="topbar">
+    <div class="breadcrumb">IDCG / <span>overview</span> / dashboard</div>
+    <div class="search-box">
+      <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="#484F58"><circle cx="11" cy="11" r="8" stroke-width="2"/><path stroke-linecap="round" stroke-width="2" d="M21 21l-4.35-4.35"/></svg>
+      <input placeholder="Search…">
+      <span class="kbd">⌘K</span>
+    </div>
+    <div class="sync-badge"><div class="pulse"></div>LIVE SYNC · 19 portals</div>
+  </div>
+
+  <div class="body">
+    <div class="greeting">
+      <h1>Morning, Rajnish. <span>138 new hits.</span></h1>
+      <p>// 2026-03-27 · last sync 4h ago · 23,606 total indexed</p>
+    </div>
+
+    <div class="stats">
+      <div class="stat">
+        <div class="stat-corner">📡</div>
+        <div class="stat-num blue">23,606</div>
+        <div class="stat-lbl">Total indexed</div>
+        <div class="stat-delta">+412 this run</div>
+      </div>
+      <div class="stat">
+        <div class="stat-corner">🎯</div>
+        <div class="stat-num amber">138</div>
+        <div class="stat-lbl">High priority</div>
+        <div class="stat-delta">score ≥ 80 · BID</div>
+      </div>
+      <div class="stat">
+        <div class="stat-corner">🌐</div>
+        <div class="stat-num green">19</div>
+        <div class="stat-lbl">Portals live</div>
+        <div class="stat-delta">+3 added this week</div>
+      </div>
+      <div class="stat">
+        <div class="stat-corner">⏰</div>
+        <div class="stat-num red">24</div>
+        <div class="stat-lbl">Closing ≤7 days</div>
+        <div class="stat-delta" style="color:#FF7B72">ACTION REQUIRED</div>
+      </div>
+    </div>
+
+    <div class="grid">
+      <div class="panel">
+        <div class="panel-header">
+          <span class="panel-title">Top Recommendations</span>
+          <span class="panel-action">view_all →</span>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Source</th>
+              <th>Title</th>
+              <th>Score</th>
+              <th>Fit</th>
+              <th>Deadline</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="portal-tag t-wb">WB</span></td>
+              <td><div class="t-title">Consultancy for Climate Change Adaptation Assessment</div><div class="t-org">world-bank.org</div></td>
+              <td><span class="score-mono">100</span></td>
+              <td><span class="fit-g">✓ GOOD</span></td>
+              <td style="color:#484F58;font-size:10px;font-family:monospace">—</td>
+            </tr>
+            <tr>
+              <td><span class="portal-tag t-ungm">UNGM</span></td>
+              <td><div class="t-title">RFP EM/YEM Provision of Monitoring Services</div><div class="t-org">ungm.org</div></td>
+              <td><span class="score-mono">98</span></td>
+              <td><span class="fit-l">✗ LOW</span></td>
+              <td style="color:#484F58;font-size:10px;font-family:monospace">—</td>
+            </tr>
+            <tr>
+              <td><span class="portal-tag t-wb">WB</span></td>
+              <td><div class="t-title">Independent Evaluation of PRFAS Program</div><div class="t-org">world-bank.org</div></td>
+              <td><span class="score-mono">96</span></td>
+              <td><span class="fit-f">~ FAIR</span></td>
+              <td style="color:#484F58;font-size:10px;font-family:monospace">—</td>
+            </tr>
+            <tr>
+              <td><span class="portal-tag t-gem">GEM</span></td>
+              <td><div class="t-title">Rural Development Impact Assessment Consulting</div><div class="t-org">gem.gov.in</div></td>
+              <td><span class="score-mono">93</span></td>
+              <td><span class="fit-l">✗ LOW</span></td>
+              <td><span class="deadline-pill">3d left</span></td>
+            </tr>
+            <tr>
+              <td><span class="portal-tag t-giz">GIZ</span></td>
+              <td><div class="t-title">Technical Assistance for Social Protection Programme</div><div class="t-org">giz.de/india</div></td>
+              <td><span class="score-mono">91</span></td>
+              <td><span class="fit-g">✓ GOOD</span></td>
+              <td style="color:#484F58;font-size:10px;font-family:monospace">Apr 15</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="right-col">
+        <div class="chat-panel">
+          <div class="chat-panel-header">
+            <div class="chat-avatar">⚡</div>
+            <div class="chat-meta">
+              <h4>TenderRadar AI</h4>
+              <p>RAG · 23,606 indexed · GPT-4o</p>
+            </div>
+            <div class="online"></div>
+          </div>
+          <div class="chat-body">
+            <div class="chat-suggest">"Find World Bank education projects in South Asia"</div>
+            <div class="chat-suggest">"High-priority GEM tenders above ₹50L"</div>
+            <div class="chat-suggest">"Which infrastructure tenders close this week?"</div>
+          </div>
+          <div class="chat-input-row">
+            <input class="chat-input" placeholder="Ask about your tenders…">
+            <button class="chat-send-btn">→</button>
+          </div>
+        </div>
+
+        <div class="health-panel">
+          <div class="panel-header">
+            <span class="panel-title">Portal Health</span>
+            <span class="panel-action">manage →</span>
+          </div>
+          <div class="portal-item">
+            <div class="h-dot" style="background:#58A6FF"></div>
+            <span class="h-name">World Bank</span>
+            <span class="h-count">486</span>
+            <div class="h-bar-wrap"><div class="h-bar" style="width:100%;background:#58A6FF"></div></div>
+          </div>
+          <div class="portal-item">
+            <div class="h-dot" style="background:#3FB950"></div>
+            <span class="h-name">GeM BidPlus</span>
+            <span class="h-count">2,103</span>
+            <div class="h-bar-wrap"><div class="h-bar" style="width:100%;background:#3FB950"></div></div>
+          </div>
+          <div class="portal-item">
+            <div class="h-dot" style="background:#C77DFF"></div>
+            <span class="h-name">UNGM</span>
+            <span class="h-count">214</span>
+            <div class="h-bar-wrap"><div class="h-bar" style="width:44%;background:#C77DFF"></div></div>
+          </div>
+          <div class="portal-item">
+            <div class="h-dot" style="background:#F59E0B"></div>
+            <span class="h-name">GIZ India</span>
+            <span class="h-count">14</span>
+            <div class="h-bar-wrap"><div class="h-bar" style="width:8%;background:#F59E0B"></div></div>
+          </div>
+          <div class="portal-item">
+            <div class="h-dot" style="background:#FF7B72"></div>
+            <span class="h-name">TED EU</span>
+            <span class="h-count">21</span>
+            <div class="h-bar-wrap"><div class="h-bar" style="width:12%;background:#FF7B72"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

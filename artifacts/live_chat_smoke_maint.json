@@ -1,0 +1,197 @@
+{
+  "summary": {
+    "ok": true,
+    "generated_at": "2026-04-08T16:31:55.216773+00:00",
+    "cases": 8,
+    "passed": 8,
+    "failed": 0,
+    "pass_rate_pct": 100.0,
+    "failed_case_ids": []
+  },
+  "cases": [
+    {
+      "id": "q01_undp_health_africa_only",
+      "query": "Show me only UNDP health consulting opportunities in Africa this month",
+      "passed": true,
+      "failures": [],
+      "has_abstain": false,
+      "has_sources_suffix": true,
+      "citations": [
+        1
+      ],
+      "source_count": 1,
+      "top_source_sites": [
+        "UNDP"
+      ],
+      "reply_preview": "Showing top results (AI reasoning temporarily unavailable):\n\n1. **REOI-Solar PV System and ICT Installation Works for Health Facilities in Zambia** \u2014 unknown (UNDP)\n\nSources: [1]"
+    },
+    {
+      "id": "q02_worldbank_governance_only",
+      "query": "Show me only World Bank governance advisory tenders",
+      "passed": true,
+      "failures": [],
+      "has_abstain": false,
+      "has_sources_suffix": true,
+      "citations": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "source_count": 15,
+      "top_source_sites": [
+        "World Bank",
+        "World Bank",
+        "World Bank",
+        "World Bank",
+        "World Bank"
+      ],
+      "reply_preview": "Showing top results (AI reasoning temporarily unavailable):\n\n1. **Consultancy Service for Full Feasibility Study for Hybrid Mini-Grid Concessions in Nine State Capitals of South Sudan** \u2014 World Bank (World Bank)\n2. **Consultancy services for E&S Assessment for"
+    },
+    {
+      "id": "q03_ungm_nutrition",
+      "query": "List UNGM consulting opportunities for nutrition and public health",
+      "passed": true,
+      "failures": [],
+      "has_abstain": false,
+      "has_sources_suffix": true,
+      "citations": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "source_count": 13,
+      "top_source_sites": [
+        "UNGM",
+        "UNGM",
+        "UNGM",
+        "UNGM",
+        "UNGM"
+      ],
+      "reply_preview": "Showing top results (AI reasoning temporarily unavailable):\n\n1. **Call for External Collaborator \u00e2\u0080\u0093 Support with copy-editing synthesis report social protection during maternity in Asia** \u2014 unknown (UNGM)\n2. **UNDP- Research Analyst- Information Technology\u2013 H"
+    },
+    {
+      "id": "q04_ec_climate_research",
+      "query": "Find EC climate change research consulting tenders",
+      "passed": true,
+      "failures": [],
+      "has_abstain": false,
+      "has_sources_suffix": true,
+      "citations": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "source_count": 15,
+      "top_source_sites": [
+        "EC",
+        "TED-EU",
+        "UNGM",
+        "UNGM",
+        "AfDB"
+      ],
+      "reply_preview": "Showing top results (AI reasoning temporarily unavailable):\n\n1. **Technical Assistance on implementation, monitoring and evaluation of employment policy at national and local level and strengthened capacities to participate in ESF** \u2014 European Union (EC)\n2. **"
+    },
+    {
+      "id": "q05_ted_education_policy",
+      "query": "Show TED-EU education policy advisory opportunities",
+      "passed": true,
+      "failures": [],
+      "has_abstain": false,
+      "has_sources_suffix": true,
+      "citations": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "source_count": 15,
+      "top_source_sites": [
+        "TED-EU",
+        "TED-EU",
+        "TED-EU",
+        "TED-EU",
+        "TED-EU"
+      ],
+      "reply_preview": "Showing top results (AI reasoning temporarily unavailable):\n\n1. **N\u00e9metorsz\u00e1g \u2013 K\u00fclf\u00f6ldi gazdas\u00e1gi seg\u00edts\u00e9ggel kapcsolatos szolg\u00e1ltat\u00e1sok \u2013 81318103 - Third Party Monitoring (TPM) of GIZ MHPSS projects inside Syria** \u2014 GIZ (TED-EU)\n2. **Sv\u00e1jc \u2013 K\u00fcl\u00f6nf\u00e9le szolg"
+    },
+    {
+      "id": "q06_wash_south_asia",
+      "query": "Urgent WASH consulting tenders in South Asia",
+      "passed": true,
+      "failures": [],
+      "has_abstain": false,
+      "has_sources_suffix": true,
+      "citations": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "source_count": 19,
+      "top_source_sites": [
+        "World Bank",
+        "World Bank",
+        "UNGM",
+        "World Bank",
+        "World Bank"
+      ],
+      "reply_preview": "Showing top results (AI reasoning temporarily unavailable):\n\n1. **CONSULTANCY SERVICES FOR FEASIBILITY STUDY MWACHE DAM IRRIGATION PROJECT** \u2014 World Bank (World Bank)\n2. **Consultancy Services for Strategic Road Sectoral Environmental and Social Assessment** \u2014"
+    },
+    {
+      "id": "q07_mel_africa",
+      "query": "Top monitoring and evaluation tenders in Africa this month",
+      "passed": true,
+      "failures": [],
+      "has_abstain": false,
+      "has_sources_suffix": true,
+      "citations": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "source_count": 15,
+      "top_source_sites": [
+        "UNGM",
+        "World Bank",
+        "World Bank",
+        "World Bank",
+        "World Bank"
+      ],
+      "reply_preview": "Showing top results (AI reasoning temporarily unavailable):\n\n1. **Call for External Collaborator Call for External Collaborator \u00e2\u0080\u0093 Enterprise Financing Needs for a Just Transition in Nigeria ILO Bureau for Employers' Activities (ACT/EMP)** \u2014 unknown (UNGM)\n2."
+    },
+    {
+      "id": "q08_infra_karnataka_only",
+      "query": "Show me only Karnataka civil works tenders",
+      "passed": true,
+      "failures": [],
+      "has_abstain": false,
+      "has_sources_suffix": true,
+      "citations": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "source_count": 15,
+      "top_source_sites": [
+        "Karnataka",
+        "Karnataka",
+        "Karnataka",
+        "Karnataka",
+        "Karnataka"
+      ],
+      "reply_preview": "Showing top results (AI reasoning temporarily unavailable):\n\n1. **Providing Project management Consultancy services for the work of Comprehensive Development of Road Drains and providing Water Supply and other allined works at Various Assembly Constituency (PA"
+    }
+  ]
+}
