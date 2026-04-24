@@ -13,8 +13,8 @@ WORKDIR /app
 RUN apt-get update && apt-get install -y \
     curl \
     wget \
-    chromium-browser \
-    chromium-chromedriver \
+    chromium \
+    chromium-driver \
     mysql-client \
     postgresql-client \
     git \
