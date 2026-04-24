@@ -15,7 +15,7 @@ RUN apt-get update && apt-get install -y \
     wget \
     chromium \
     chromium-driver \
-    mysql-client \
+    default-mysql-client \
     postgresql-client \
     git \
     && rm -rf /var/lib/apt/lists/*
