@@ -1,0 +1,21 @@
+FROM python:3.11-slim
+
+WORKDIR /app
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    curl netcat-openbsd \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY requirements.api.txt .
+RUN pip install --no-cache-dir -r requirements.api.txt
+
+COPY . .
+
+RUN mkdir -p /app/output/portal_excels /app/logs /app/artifacts /app/chroma_db
+
+EXPOSE 8001
+
+HEALTHCHECK --interval=30s --timeout=10s --retries=3 \
+  CMD curl -f http://localhost:8001/health || exit 1
+
+CMD ["python", "celery_worker.py"]
