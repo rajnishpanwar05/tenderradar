@@ -20,8 +20,8 @@ const FRESHNESS_CONFIG: Record<
   { dotCls: string; label: string }
 > = {
   fresh:   { dotCls: "bg-emerald-500", label: "Fresh" },
-  recent:  { dotCls: "bg-amber-400",   label: "Recent" },
-  stale:   { dotCls: "bg-red-500",     label: "Stale" },
+  recent:  { dotCls: "bg-slate-500",   label: "Recent" },
+  stale:   { dotCls: "bg-rose-500",    label: "Stale" },
   unknown: { dotCls: "bg-slate-400",   label: "Unknown" },
 };
 
@@ -44,7 +44,7 @@ export function PortalFreshnessIndicator({
         aria-hidden="true"
       />
       {showLabel && (
-        <span className="text-xs text-muted-foreground">{config.label}</span>
+        <span className="text-xs text-slate-500">{config.label}</span>
       )}
     </span>
   );

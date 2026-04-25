@@ -33,16 +33,16 @@ export function MobileNav({ open, onClose }: MobileNavProps) {
       />
 
       {/* Drawer */}
-      <div className="fixed inset-y-0 left-0 z-50 w-64 bg-brand text-white flex flex-col md:hidden shadow-xl">
-        <div className="flex items-center justify-between px-4 py-5 border-b border-white/10">
+      <div className="fixed inset-y-0 left-0 z-50 w-72 bg-white text-slate-900 flex flex-col md:hidden shadow-2xl border-r border-slate-200">
+        <div className="flex items-center justify-between px-4 py-5 border-b border-slate-200">
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-lg bg-white/15 flex items-center justify-center">
+            <div className="w-8 h-8 rounded-lg bg-slate-900 flex items-center justify-center">
               <Radio className="w-4 h-4 text-white" />
             </div>
             <span className="font-semibold text-sm">TenderRadar</span>
           </div>
-          <button onClick={onClose} className="p-1 rounded hover:bg-white/10">
-            <X className="w-5 h-5" />
+          <button onClick={onClose} className="p-1 rounded hover:bg-slate-100">
+            <X className="w-5 h-5 text-slate-500" />
           </button>
         </div>
 
@@ -57,8 +57,8 @@ export function MobileNav({ open, onClose }: MobileNavProps) {
                 className={cn(
                   "flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors",
                   active
-                    ? "bg-white/20 text-white"
-                    : "text-white/70 hover:bg-white/10 hover:text-white"
+                    ? "bg-slate-900 text-white"
+                    : "text-slate-600 hover:bg-slate-100 hover:text-slate-900"
                 )}
               >
                 <Icon className="w-4 h-4" />

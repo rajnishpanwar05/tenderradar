@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 export default function GlobalError({
   error,
@@ -16,13 +17,20 @@ export default function GlobalError({
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen gap-4 text-center px-4">
-      <div className="text-4xl font-bold text-destructive">Something went wrong</div>
-      <p className="text-sm text-muted-foreground max-w-sm">
+      <div className="shell-panel rounded-[2rem] px-8 py-10 max-w-md w-full">
+        <div className="text-3xl font-semibold text-slate-950 mb-2">Something went wrong</div>
+        <p className="text-sm text-slate-500 max-w-sm mx-auto">
         {error.message || "An unexpected error occurred."}
-      </p>
-      <Button onClick={reset} variant="outline" size="sm">
-        Try again
-      </Button>
+        </p>
+        <div className="mt-6 flex items-center justify-center gap-3">
+          <Button onClick={reset} variant="outline" size="sm" className="border-slate-200 bg-white text-slate-700 hover:bg-slate-50">
+            Try again
+          </Button>
+          <Button asChild variant="outline" size="sm" className="border-slate-200 bg-white text-slate-700 hover:bg-slate-50">
+            <Link href="/dashboard">Go to dashboard</Link>
+          </Button>
+        </div>
+      </div>
     </div>
   );
 }

@@ -15,7 +15,7 @@ export function PortalHealthCard({ portal }: PortalHealthCardProps) {
   const displayName = portalLabel(portal.portal);
 
   return (
-    <Card>
+    <Card className="shadow-sm hover:shadow-md transition-shadow">
       <CardContent className="p-5">
         {/* Header */}
         <div className="mb-4 flex items-start justify-between gap-3">
@@ -49,7 +49,7 @@ export function PortalHealthCard({ portal }: PortalHealthCardProps) {
         <Button
           variant="outline"
           size="sm"
-          className="w-full"
+          className="w-full border-slate-200 bg-white text-slate-700 hover:bg-slate-50"
           onClick={() =>
             (window.location.href = `/tenders?source_portals=${encodeURIComponent(portal.portal)}`)
           }

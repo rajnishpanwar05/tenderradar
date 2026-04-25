@@ -4,28 +4,28 @@ import type { SystemStats } from "@/lib/api-types";
 
 function KpiCard({ title, value, icon: Icon, subtitle, trend }: any) {
   return (
-    <div className="relative group overflow-hidden rounded-[2rem] border border-slate-200 bg-white p-8 transition-all hover:-translate-y-1 hover:shadow-2xl hover:shadow-indigo-500/10">
+    <div className="relative group overflow-hidden rounded-[2rem] border border-slate-200 bg-white p-8 transition-all hover:-translate-y-1 hover:shadow-lg">
       <div className="relative flex items-start justify-between">
         <div className="space-y-4">
-          <p className="text-xs font-black tracking-widest text-slate-400 uppercase">{title}</p>
+          <p className="text-xs font-semibold tracking-widest text-slate-400 uppercase">{title}</p>
           <div className="flex items-baseline gap-3">
-            <span className="text-5xl font-black text-slate-900 tracking-tighter leading-none">
+            <span className="text-5xl font-semibold text-slate-950 tracking-tighter leading-none">
               {value.toLocaleString()}
             </span>
             {trend === "up" && (
-              <span className="flex items-center text-xs font-bold text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-md border border-emerald-100">
+              <span className="flex items-center text-xs font-medium text-slate-700 bg-slate-100 px-2.5 py-1 rounded-md border border-slate-200">
                 +12%
               </span>
             )}
           </div>
           {subtitle && (
-            <p className="text-sm font-medium text-slate-500 flex items-center gap-1">
+            <p className="text-sm text-slate-500 flex items-center gap-1">
               {subtitle}
             </p>
           )}
         </div>
-        <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-slate-50 border border-slate-100 shadow-sm group-hover:bg-indigo-50 group-hover:border-indigo-100 transition-colors duration-500">
-          <Icon className="h-8 w-8 text-slate-400 group-hover:text-indigo-600 transition-colors" />
+        <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-slate-50 border border-slate-100 shadow-sm group-hover:bg-slate-100 transition-colors duration-500">
+          <Icon className="h-8 w-8 text-slate-500 group-hover:text-slate-900 transition-colors" />
         </div>
       </div>
     </div>

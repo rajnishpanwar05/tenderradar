@@ -34,12 +34,12 @@ export function PortalBreakdownTable({ portals }: PortalBreakdownTableProps) {
 
   const SortIcon = ({ k }: { k: SortKey }) =>
     sortKey === k
-      ? sortAsc ? <ChevronUp className="w-4 h-4 ml-1 inline text-indigo-500" /> : <ChevronDown className="w-4 h-4 ml-1 inline text-indigo-500" />
+      ? sortAsc ? <ChevronUp className="w-4 h-4 ml-1 inline text-slate-700" /> : <ChevronDown className="w-4 h-4 ml-1 inline text-slate-700" />
       : null;
 
   const TH = ({ children, k }: { children: React.ReactNode; k: SortKey }) => (
     <TableHead
-      className="cursor-pointer select-none whitespace-nowrap text-slate-500 font-black tracking-widest uppercase text-xs hover:bg-slate-50 transition-colors py-4"
+      className="cursor-pointer select-none whitespace-nowrap text-slate-500 font-semibold tracking-widest uppercase text-xs hover:bg-slate-50 transition-colors py-4"
       onClick={() => handleSort(k)}
     >
       {children}<SortIcon k={k} />
@@ -61,19 +61,19 @@ export function PortalBreakdownTable({ portals }: PortalBreakdownTableProps) {
       <TableBody>
         {sorted.map(p => (
           <TableRow key={p.portal} className="border-b border-slate-100 hover:bg-slate-50/50 transition-colors">
-            <TableCell className="font-bold text-slate-800 py-4">{portalLabel(p.portal)}</TableCell>
+            <TableCell className="font-semibold text-slate-800 py-4">{portalLabel(p.portal)}</TableCell>
             <TableCell className="font-mono text-slate-600">{p.total_tenders.toLocaleString()}</TableCell>
-            <TableCell className="font-mono font-bold text-emerald-600">+{p.new_last_7_days}</TableCell>
+            <TableCell className="font-mono font-medium text-slate-700">+{p.new_last_7_days}</TableCell>
             <TableCell>
               <div className="flex items-center gap-3 min-w-[120px]">
                 <FitScoreBar label="" score={p.avg_fit_score} className="flex-1" />
-                <span className="text-xs font-black text-slate-500 w-8 text-right font-mono">
+                <span className="text-xs font-semibold text-slate-500 w-8 text-right font-mono">
                   {p.avg_fit_score.toFixed(0)}
                 </span>
               </div>
             </TableCell>
             <TableCell>
-              <span className="bg-indigo-50 text-indigo-600 px-2.5 py-1 rounded-md font-bold text-xs inline-flex items-center justify-center min-w-[2rem]">
+              <span className="bg-slate-100 text-slate-700 px-2.5 py-1 rounded-md font-semibold text-xs inline-flex items-center justify-center min-w-[2rem]">
                 {p.high_fit_count}
               </span>
             </TableCell>

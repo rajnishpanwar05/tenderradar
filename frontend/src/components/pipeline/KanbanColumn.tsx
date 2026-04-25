@@ -20,11 +20,11 @@ export function KanbanColumn({ id, label, color, accent, entries, onEdit }: Prop
     <div className="flex w-64 shrink-0 flex-col gap-2 lg:w-[220px] xl:w-60">
       {/* Column header */}
       <div className={cn(
-        "sticky top-0 z-10 flex items-center justify-between rounded-lg border px-3 py-2",
+        "sticky top-0 z-10 flex items-center justify-between rounded-lg border px-3 py-2 bg-white",
         color, accent,
       )}>
-        <span className="text-sm font-semibold">{label}</span>
-        <span className="flex h-5 w-5 items-center justify-center rounded-full bg-background text-[11px] font-bold tabular-nums shadow-sm">
+        <span className="text-sm font-semibold text-slate-900">{label}</span>
+        <span className="flex h-5 w-5 items-center justify-center rounded-full bg-slate-100 text-[11px] font-semibold tabular-nums text-slate-700 shadow-sm">
           {entries.length}
         </span>
       </div>
@@ -38,8 +38,8 @@ export function KanbanColumn({ id, label, color, accent, entries, onEdit }: Prop
             className={cn(
               "flex min-h-[120px] flex-col gap-2 rounded-xl p-1.5 transition-colors",
               snapshot.isDraggingOver
-                ? "bg-primary/5 ring-2 ring-primary/20"
-                : "bg-muted/30",
+                ? "bg-slate-100 ring-2 ring-slate-300"
+                : "bg-slate-50/80",
             )}
           >
             {entries.map((entry, i) => (
@@ -53,7 +53,7 @@ export function KanbanColumn({ id, label, color, accent, entries, onEdit }: Prop
             {provided.placeholder}
 
             {entries.length === 0 && !snapshot.isDraggingOver && (
-              <div className="flex h-20 items-center justify-center rounded-lg border-2 border-dashed border-muted-foreground/20 text-[11px] text-muted-foreground/50">
+              <div className="flex h-20 items-center justify-center rounded-lg border-2 border-dashed border-slate-200 text-[11px] text-slate-400">
                 Drop here
               </div>
             )}

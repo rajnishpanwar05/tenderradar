@@ -27,12 +27,14 @@ export function AppShell({ children }: { children: React.ReactNode }) {
   };
 
   return (
-    <div className="flex h-screen overflow-hidden bg-white text-slate-900 relative selection:bg-indigo-500/30 selection:text-indigo-900">
+    <div className="flex h-screen overflow-hidden bg-transparent text-slate-900 relative selection:bg-slate-900/10 selection:text-slate-950">
       <div className="flex w-full h-full relative z-10">
+        <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,rgba(148,163,184,0.08)_1px,transparent_1px),linear-gradient(to_bottom,rgba(148,163,184,0.08)_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:linear-gradient(to_bottom,black_18%,transparent_95%)] opacity-40" />
+
         {/* Desktop Sidebar */}
         <aside className={cn(
-          "hidden md:flex flex-col flex-shrink-0 bg-white/60 backdrop-blur-xl shadow-[4px_0_24px_rgba(0,0,0,0.04)]",
-          "transition-all duration-300 ease-in-out border-r border-slate-200",
+          "hidden md:flex flex-col flex-shrink-0 glass-sidebar shadow-[4px_0_24px_rgba(15,23,42,0.04)]",
+          "transition-all duration-300 ease-in-out",
           collapsed ? "w-16" : "w-56"
         )}>
           <Sidebar collapsed={collapsed} />

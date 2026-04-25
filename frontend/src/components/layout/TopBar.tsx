@@ -32,19 +32,19 @@ export function TopBar({ sidebarCollapsed, onToggleSidebar, onOpenMobileNav }: T
   return (
     <header className={cn(
       "h-16 flex-shrink-0 flex items-center gap-4 px-6 z-20",
-      "bg-white/60 backdrop-blur-xl border-b border-slate-200"
+      "glass-topbar text-slate-900"
     )}>
 
       {/* Mobile hamburger */}
       <button onClick={onOpenMobileNav}
-        className="md:hidden p-2 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors"
+        className="md:hidden p-2 rounded-lg text-slate-500 hover:text-slate-900 hover:bg-slate-100 transition-colors"
         aria-label="Open navigation">
         <Menu className="w-5 h-5" />
       </button>
 
       {/* Sidebar toggle */}
       <button onClick={onToggleSidebar}
-        className="hidden md:flex p-2 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-50 transition-colors"
+        className="hidden md:flex p-2 rounded-lg text-slate-500 hover:text-slate-900 hover:bg-slate-100 transition-colors"
         aria-label="Toggle sidebar">
         {sidebarCollapsed
           ? <PanelLeftOpen className="w-5 h-5" />
@@ -53,13 +53,13 @@ export function TopBar({ sidebarCollapsed, onToggleSidebar, onOpenMobileNav }: T
 
       {/* Breadcrumb */}
       {crumbs.length > 0 && (
-        <nav className="hidden sm:flex items-center gap-2 text-sm font-bold text-slate-400 mr-2">
-          <span className="text-slate-300">IDCG</span>
+        <nav className="hidden sm:flex items-center gap-2 text-sm font-medium text-slate-500 mr-2">
+          <span className="text-slate-700 font-semibold">TenderRadar</span>
           {crumbs.map((c, i) => (
             <span key={c.href} className="flex items-center gap-2">
               <span className="text-slate-300 mx-0.5">/</span>
               <span className={cn(
-                i === crumbs.length - 1 ? "text-slate-800" : "hover:text-indigo-600 transition-colors cursor-pointer"
+                i === crumbs.length - 1 ? "text-slate-900" : "hover:text-slate-700 transition-colors cursor-pointer"
               )}>
                 {c.label}
               </span>
@@ -72,10 +72,10 @@ export function TopBar({ sidebarCollapsed, onToggleSidebar, onOpenMobileNav }: T
       {!pathname.startsWith("/search") && !pathname.startsWith("/chat") && (
         <form onSubmit={handleSearch} className="flex-1 max-w-sm ml-auto">
           <div className={cn(
-            "relative flex items-center rounded-full transition-all duration-200",
+            "relative flex items-center rounded-full transition-all duration-200 border",
             focused
-              ? "border-indigo-500 ring-2 ring-indigo-500/20 shadow-md bg-white"
-              : "border-slate-200 bg-slate-50"
+              ? "border-slate-400 ring-2 ring-slate-900/10 shadow-md bg-white"
+              : "border-slate-200 bg-slate-50/80"
           )}>
             <Search className="absolute left-3 w-4 h-4 text-slate-400 pointer-events-none" />
             <input
@@ -83,8 +83,8 @@ export function TopBar({ sidebarCollapsed, onToggleSidebar, onOpenMobileNav }: T
               onChange={e => setQ(e.target.value)}
               onFocus={() => setFocused(true)}
               onBlur={() => setFocused(false)}
-              placeholder="Search components..."
-              className="w-full h-10 pl-10 pr-4 text-sm bg-transparent outline-none text-slate-800 placeholder:text-slate-400 font-bold"
+              placeholder="Search tenders, portals, or notes..."
+              className="w-full h-10 pl-10 pr-4 text-sm bg-transparent outline-none text-slate-800 placeholder:text-slate-400 font-medium"
             />
           </div>
         </form>
@@ -93,18 +93,18 @@ export function TopBar({ sidebarCollapsed, onToggleSidebar, onOpenMobileNav }: T
       <div className={pathname.startsWith("/search") || pathname.startsWith("/chat") ? "flex-1" : ""} />
 
       {/* Live status badge */}
-      <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 shadow-sm">
-        <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-        <span className="text-xs font-black tracking-widest uppercase text-emerald-600">Live</span>
+      <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-900 text-white shadow-sm">
+        <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+        <span className="text-xs font-semibold tracking-widest uppercase text-white/90">Live</span>
       </div>
 
       {/* Notifications */}
-      <button className="p-2 rounded-full text-slate-400 hover:text-slate-700 hover:bg-slate-50 transition-colors relative border border-slate-200 bg-white shadow-sm">
+      <button className="p-2 rounded-full text-slate-500 hover:text-slate-900 hover:bg-slate-100 transition-colors relative border border-slate-200 bg-white shadow-sm">
         <Bell className="w-4 h-4" />
       </button>
 
       {/* Avatar */}
-      <div className="w-9 h-9 rounded-[10px] bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white text-sm font-black cursor-pointer shadow-md shadow-indigo-500/30 border border-indigo-400/50">
+      <div className="w-9 h-9 rounded-[10px] bg-slate-900 flex items-center justify-center text-white text-sm font-semibold cursor-pointer shadow-md border border-slate-800">
         ID
       </div>
     </header>

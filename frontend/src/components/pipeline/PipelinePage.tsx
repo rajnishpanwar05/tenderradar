@@ -15,11 +15,11 @@ export function PipelinePage() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold tracking-tight flex items-center gap-2">
-            <Layers className="h-6 w-6 text-primary" />
+          <h1 className="text-2xl font-semibold tracking-tight flex items-center gap-2 text-slate-950">
+            <Layers className="h-6 w-6 text-slate-700" />
             Pipeline
           </h1>
-          <p className="mt-0.5 text-sm text-muted-foreground">
+          <p className="mt-0.5 text-sm text-slate-500">
             {isLoading
               ? "Loading pipeline…"
               : `${total} tender${total !== 1 ? "s" : ""} tracked  •  drag cards to move stages`}
@@ -28,7 +28,7 @@ export function PipelinePage() {
         <button
           onClick={() => mutate()}
           disabled={isValidating}
-          className="flex items-center gap-2 rounded-lg border px-3 py-2 text-sm font-medium hover:bg-muted disabled:opacity-50 transition-colors"
+          className="flex items-center gap-2 rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50 disabled:opacity-50 transition-colors"
           title="Refresh pipeline"
         >
           <RefreshCw className={`h-4 w-4 ${isValidating ? "animate-spin" : ""}`} />

@@ -77,20 +77,21 @@ export function TenderListPage() {
   const hasActiveFilters = sector || region || minPriority > 0;
 
   return (
-    <div className="flex flex-col w-full max-w-[1500px] mx-auto min-h-screen bg-[#fafafa] p-4 sm:p-8 md:p-12 fade-in selection:bg-blue-100 selection:text-blue-900">
-      
-      {/* ─── MASSIVE BREADCRUMB / HDR ─── */}
-      <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between mb-8 pb-8 border-b border-gray-200">
+    <div className="flex flex-col w-full max-w-[1500px] mx-auto min-h-screen p-4 sm:p-8 md:p-12 selection:bg-slate-900/10 selection:text-slate-950">
+      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-slate-300 to-transparent" />
+
+      {/* ─── HEADER ─── */}
+      <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between mb-8 pb-8 border-b border-slate-200">
         <div>
           <div className="flex items-center gap-4 mb-2">
-            <h1 className="text-4xl font-black tracking-tight text-slate-900">Tender Feed</h1>
+            <h1 className="text-4xl font-semibold tracking-tight text-slate-950">Tender Feed</h1>
             <AnimatePresence>
               {(isLoading || isValidating) && (
                 <motion.span 
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.8 }}
-                  className="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-3 py-1 text-xs font-bold tracking-widest text-blue-700 uppercase shadow-sm"
+                  className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-semibold tracking-widest text-slate-600 uppercase shadow-sm"
                 >
                   <Activity className="h-3.5 w-3.5 animate-pulse" />
                   Syncing
@@ -98,9 +99,9 @@ export function TenderListPage() {
               )}
             </AnimatePresence>
           </div>
-          <p className="text-lg font-medium text-slate-500">
+          <p className="text-lg text-slate-500">
             {isLoading ? "Fetching intelligence…" : (
-              <><strong className="text-slate-900 font-black">{total.toLocaleString()}</strong> active opportunities tracked by the LLM.</>
+              <><strong className="text-slate-900 font-semibold">{total.toLocaleString()}</strong> active opportunities tracked by the platform.</>
             )}
           </p>
         </div>
@@ -108,16 +109,16 @@ export function TenderListPage() {
         <button
           onClick={() => setShowFilters((f) => !f)}
           className={cn(
-            "flex items-center gap-2.5 rounded-full border px-6 py-3 text-sm font-bold transition-all shadow-sm active:scale-95",
+            "flex items-center gap-2.5 rounded-full border px-6 py-3 text-sm font-medium transition-all shadow-sm active:scale-95",
             showFilters
-              ? "border-blue-500 bg-blue-600 text-white shadow-md shadow-blue-500/20"
-              : "border-gray-300 bg-white text-slate-700 hover:bg-slate-50 hover:border-gray-400",
+              ? "border-slate-900 bg-slate-900 text-white shadow-md"
+              : "border-slate-300 bg-white text-slate-700 hover:bg-slate-50 hover:border-slate-400",
           )}
         >
           <Filter className="h-4 w-4" />
           Filter & Refine
           {hasActiveFilters && (
-            <span className={cn("flex h-5 w-5 items-center justify-center rounded-full text-[10px] font-black", showFilters ? "bg-white text-blue-600" : "bg-blue-100 text-blue-700")}>
+            <span className={cn("flex h-5 w-5 items-center justify-center rounded-full text-[10px] font-semibold", showFilters ? "bg-white text-slate-900" : "bg-slate-100 text-slate-700")}>
               {[sector, region, minPriority > 0].filter(Boolean).length}
             </span>
           )}
@@ -136,12 +137,12 @@ export function TenderListPage() {
             <div className="flex flex-wrap items-center gap-6 rounded-[2rem] border border-gray-200 bg-white p-6 shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
               {/* Sector Dropdown */}
               <div className="flex flex-col gap-2 min-w-[200px]">
-                <label className="text-[11px] font-black tracking-widest uppercase text-slate-400">Sector</label>
+                <label className="text-[11px] font-semibold tracking-widest uppercase text-slate-400">Sector</label>
                 <div className="relative">
                   <select
                     value={sector}
                     onChange={(e) => { setSector(e.target.value); setPage(1); }}
-                    className="w-full h-12 appearance-none rounded-xl border border-gray-200 bg-gray-50 px-4 pr-10 text-sm font-bold text-slate-700 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all cursor-pointer"
+                    className="w-full h-12 appearance-none rounded-xl border border-slate-200 bg-slate-50 px-4 pr-10 text-sm font-medium text-slate-700 focus:outline-none focus:border-slate-400 focus:ring-2 focus:ring-slate-900/10 transition-all cursor-pointer"
                   >
                     <option value="">All sectors</option>
                     {SECTORS.map((s) => (
@@ -154,12 +155,12 @@ export function TenderListPage() {
 
               {/* Region Dropdown */}
               <div className="flex flex-col gap-2 min-w-[200px]">
-                <label className="text-[11px] font-black tracking-widest uppercase text-slate-400">Region</label>
+                <label className="text-[11px] font-semibold tracking-widest uppercase text-slate-400">Region</label>
                 <div className="relative">
                   <select
                     value={region}
                     onChange={(e) => { setRegion(e.target.value); setPage(1); }}
-                    className="w-full h-12 appearance-none rounded-xl border border-gray-200 bg-gray-50 px-4 pr-10 text-sm font-bold text-slate-700 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all cursor-pointer"
+                    className="w-full h-12 appearance-none rounded-xl border border-slate-200 bg-slate-50 px-4 pr-10 text-sm font-medium text-slate-700 focus:outline-none focus:border-slate-400 focus:ring-2 focus:ring-slate-900/10 transition-all cursor-pointer"
                   >
                     <option value="">Global (All Regions)</option>
                     {REGIONS.map((r) => (
@@ -173,8 +174,8 @@ export function TenderListPage() {
               {/* Minimum AI Score Slider */}
               <div className="flex flex-col gap-2 flex-grow max-w-sm pl-4 border-l border-gray-100">
                 <div className="flex justify-between items-center">
-                  <label className="text-[11px] font-black tracking-widest uppercase text-slate-400">Minimum AI Match</label>
-                  <span className="text-sm font-black text-blue-600 bg-blue-50 px-2.5 py-0.5 rounded-md border border-blue-100">{minPriority || "Any Score"}</span>
+                  <label className="text-[11px] font-semibold tracking-widest uppercase text-slate-400">Minimum AI Match</label>
+                  <span className="text-sm font-semibold text-slate-700 bg-slate-100 px-2.5 py-0.5 rounded-md border border-slate-200">{minPriority || "Any Score"}</span>
                 </div>
                 <input
                   type="range"
@@ -189,7 +190,7 @@ export function TenderListPage() {
               {hasActiveFilters && (
                 <button
                   onClick={clearFilters}
-                  className="flex items-center gap-2 ml-auto rounded-full bg-slate-100 px-5 py-3.5 text-sm font-bold text-slate-500 hover:bg-slate-200 hover:text-slate-800 transition-colors"
+                  className="flex items-center gap-2 ml-auto rounded-full bg-slate-100 px-5 py-3.5 text-sm font-medium text-slate-600 hover:bg-slate-200 hover:text-slate-900 transition-colors"
                 >
                   <X className="h-4 w-4" /> Reset 
                 </button>
@@ -209,7 +210,7 @@ export function TenderListPage() {
       )}
 
       {/* ─── MASSIVE CLEAN LIST / TABLE ─── */}
-      <div className="flex-1 min-h-0 bg-white rounded-[2rem] shadow-[0_4px_40px_rgba(0,0,0,0.03)] border border-gray-100 overflow-hidden mb-8">
+      <div className="flex-1 min-h-0 shell-panel-strong rounded-[2rem] overflow-hidden mb-8">
         {results.length === 0 && !isLoading ? (
           <EmptyState onReset={clearFilters} />
         ) : (
@@ -226,21 +227,21 @@ export function TenderListPage() {
       {/* ─── Pagination ─── */}
       {totalPages > 1 && (
         <div className="flex items-center justify-between pb-10 px-4">
-          <span className="text-sm font-bold text-slate-400 tracking-wide uppercase">
-            Page <span className="text-slate-900 border border-gray-200 bg-white px-2.5 py-1 rounded-md mx-1">{page}</span> of {totalPages}
+          <span className="text-sm font-medium text-slate-500 tracking-wide uppercase">
+            Page <span className="text-slate-900 border border-slate-200 bg-white px-2.5 py-1 rounded-md mx-1">{page}</span> of {totalPages}
           </span>
           <div className="flex gap-4">
             <button
               onClick={() => setPage((p) => Math.max(1, p - 1))}
               disabled={page === 1}
-              className="rounded-full border border-gray-200 bg-white px-6 py-2.5 text-sm font-bold text-slate-700 shadow-sm hover:bg-slate-50 disabled:opacity-30 disabled:hover:bg-white transition-all active:scale-95"
+              className="rounded-full border border-slate-200 bg-white px-6 py-2.5 text-sm font-medium text-slate-700 shadow-sm hover:bg-slate-50 disabled:opacity-30 disabled:hover:bg-white transition-all active:scale-95"
             >
               ← Previous
             </button>
             <button
               onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
               disabled={!hasMore && page >= totalPages}
-              className="rounded-full border border-gray-200 bg-white px-6 py-2.5 text-sm font-bold text-slate-700 shadow-sm hover:bg-slate-50 disabled:opacity-30 disabled:hover:bg-white transition-all active:scale-95"
+              className="rounded-full border border-slate-200 bg-white px-6 py-2.5 text-sm font-medium text-slate-700 shadow-sm hover:bg-slate-50 disabled:opacity-30 disabled:hover:bg-white transition-all active:scale-95"
             >
               Next →
             </button>
@@ -253,9 +254,9 @@ export function TenderListPage() {
 
 function FilterChip({ children, onRemove }: { children: React.ReactNode; onRemove: () => void }) {
   return (
-    <span className="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-3.5 py-1.5 text-xs font-bold text-blue-700 shadow-sm">
+    <span className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3.5 py-1.5 text-xs font-medium text-slate-700 shadow-sm">
       {children}
-      <button onClick={onRemove} className="rounded-full hover:bg-blue-200 p-0.5 transition-colors text-blue-500">
+      <button onClick={onRemove} className="rounded-full hover:bg-slate-200 p-0.5 transition-colors text-slate-500">
         <X className="h-3.5 w-3.5" />
       </button>
     </span>

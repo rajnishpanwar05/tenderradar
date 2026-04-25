@@ -18,16 +18,15 @@ export function SectorBreakdownChart({ data }: SectorBreakdownChartProps) {
     .sort((a, b) => b.value - a.value)
     .slice(0, 7);
 
-  // Vibrant, rich UI colors
-  const COLORS = ['#6366f1', '#10B981', '#06b6d4', '#f43f5e', '#8b5cf6', '#f59e0b', '#3b82f6'];
+  const COLORS = ['#0f172a', '#475569', '#64748b', '#94a3b8', '#334155', '#0f766e', '#1e3a8a'];
 
   const CustomTooltip = ({ active, payload, label }: any) => {
     if (active && payload && payload.length) {
       return (
         <div className="bg-slate-900 text-white p-4 rounded-xl shadow-2xl border border-slate-700">
-          <p className="font-bold text-sm mb-1">{label}</p>
-          <p className="text-emerald-400 font-mono text-2xl font-black">
-            {payload[0].value.toLocaleString()} <span className="text-xs text-slate-400 uppercase tracking-widest font-bold">Tenders</span>
+          <p className="font-semibold text-sm mb-1">{label}</p>
+          <p className="text-white font-mono text-2xl font-semibold">
+            {payload[0].value.toLocaleString()} <span className="text-xs text-slate-400 uppercase tracking-widest font-semibold">Tenders</span>
           </p>
         </div>
       );
@@ -51,7 +50,7 @@ export function SectorBreakdownChart({ data }: SectorBreakdownChartProps) {
             dataKey="name" 
             axisLine={false} 
             tickLine={false} 
-            tick={{ fill: '#475569', fontSize: 13, fontWeight: 700 }}
+            tick={{ fill: '#475569', fontSize: 13, fontWeight: 600 }}
             width={160}
           />
           <Tooltip cursor={{ fill: 'rgba(241, 245, 249, 0.5)' }} content={<CustomTooltip />} />
