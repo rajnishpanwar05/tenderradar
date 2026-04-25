@@ -1847,7 +1847,97 @@ def get_intel_tenders(
             "next_cursor": next_cursor,
         }
     except Error as e:
-        _log.error("[db] get_intel_tenders error: %s", e)
+        _log.error("[db] get_intel_tenders error (JOIN failed: %s) — falling back to tenders table", e)
+        return _get_tenders_fallback(limit=limit, offset=offset, sector=sector,
+                                     region=region, source_site=source_site)
+
+
+def _get_tenders_fallback(
+    limit: int = 50,
+    offset: int = 0,
+    sector: Optional[str] = None,
+    region: Optional[str] = None,
+    source_site: Optional[str] = None,
+) -> dict:
+    """Direct query against the tenders table — avoids large JOINs that overflow Railway /tmp."""
+    where: list = ["(is_expired = 0 OR deadline IS NULL)", "is_duplicate = 0"]
+    params: list = []
+
+    if sector:
+        if isinstance(sector, str):
+            sector = [sector]
+        where.append("(" + " OR ".join("primary_sector LIKE %s" for _ in sector) + ")")
+        params.extend(f"%{s}%" for s in sector)
+
+    if region:
+        if isinstance(region, str):
+            region = [region]
+        where.append("(" + " OR ".join("country LIKE %s" for _ in region) + ")")
+        params.extend(f"%{r}%" for r in region)
+
+    if source_site:
+        if isinstance(source_site, str):
+            source_site = [source_site]
+        where.append("(" + " OR ".join("source_portal LIKE %s" for _ in source_site) + ")")
+        params.extend(f"%{p}%" for p in source_site)
+
+    where_sql = "WHERE " + " AND ".join(where)
+
+    try:
+        conn = get_connection()
+        cur  = conn.cursor(dictionary=True)
+
+        cur.execute(f"SELECT COUNT(*) AS cnt FROM tenders {where_sql}", params)
+        total = int((cur.fetchone() or {}).get("cnt", 0))
+
+        cur.execute(
+            f"""SELECT
+                tender_id,
+                title_clean   AS title,
+                url,
+                source_portal AS source_site,
+                scraped_at    AS date_first_seen,
+                organization,
+                primary_sector AS sector,
+                ''            AS consulting_type,
+                country       AS region,
+                'unknown'     AS deadline_category,
+                COALESCE(fit_score, 0) AS bid_fit_score,
+                COALESCE(fit_score, 0) AS priority_score,
+                'medium'      AS competition_level,
+                'medium'      AS opportunity_size,
+                0             AS complexity_score,
+                NULL          AS opportunity_insight,
+                NULL          AS enriched_at,
+                country,
+                deadline,
+                deadline_raw,
+                estimated_budget_usd,
+                is_duplicate,
+                is_expired,
+                description,
+                word_count,
+                NULL AS deep_scope, NULL AS deep_ai_summary,
+                NULL AS deep_document_links, NULL AS deep_contract_duration,
+                NULL AS deep_budget_currency, NULL AS deep_date_pre_bid,
+                NULL AS deep_date_qa_deadline, NULL AS deep_date_contract_start,
+                NULL AS deep_eval_technical_weight, NULL AS deep_eval_financial_weight,
+                NULL AS deep_min_years_experience, NULL AS deep_min_similar_projects,
+                0 AS amendment_count, NULL AS last_amended_at,
+                COALESCE(fit_score, 0) AS fit_score,
+                NULL AS fit_explanation,
+                NULL AS budget_usd
+            FROM tenders {where_sql}
+            ORDER BY scraped_at DESC
+            LIMIT %s OFFSET %s""",
+            params + [int(limit), int(offset)],
+        )
+        rows = cur.fetchall() or []
+        cur.close()
+        conn.close()
+        return {"results": rows, "total": total, "limit": limit, "offset": offset, "next_cursor": None}
+    except Error as e2:
+        _log.error("[db] _get_tenders_fallback error: %s", e2)
         return {"results": [], "total": 0, "limit": limit, "offset": offset, "next_cursor": None}
 
 
