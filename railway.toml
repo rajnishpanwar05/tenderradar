@@ -1,6 +1,6 @@
 [build]
 builder = "dockerfile"
-dockerfilePath = "Dockerfile"
+dockerfilePath = "Dockerfile.api"
 
 [deploy]
 startCommand = "python run_api.py --workers 2 --no-reload"
