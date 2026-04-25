@@ -1,0 +1,93 @@
+# docker-compose.prod.yml — Railway deployment (no Ollama, no local volumes)
+# GPT-4o / Gemini fallback handles LLM — Ollama not needed in prod.
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: tenderradar-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASS}
+      MYSQL_DATABASE: ${DB_NAME}
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - tenderradar
+
+  redis:
+    image: redis:7.2-alpine
+    container_name: tenderradar-redis
+    volumes:
+      - redis_data:/data
+    networks:
+      - tenderradar
+
+  backend:
+    build: .
+    container_name: tenderradar-backend
+    command: python run_api.py --workers 2 --no-reload
+    environment:
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_USER: ${DB_USER}
+      DB_PASS: ${DB_PASS}
+      DB_NAME: ${DB_NAME}
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
+      GEMINI_API_KEY: ${GEMINI_API_KEY}
+      API_SECRET_KEY: ${API_SECRET_KEY}
+      REDIS_URL: redis://redis:6379/0
+      TELEGRAM_BOT_TOKEN: ${TELEGRAM_BOT_TOKEN:-}
+      TELEGRAM_CHAT_ID: ${TELEGRAM_CHAT_ID:-}
+    ports:
+      - "8000:8000"
+    volumes:
+      - chroma_data:/app/chroma_db
+      - artifacts_data:/app/artifacts
+    depends_on:
+      mysql:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    networks:
+      - tenderradar
+    restart: unless-stopped
+
+  celery_worker:
+    build: .
+    container_name: tenderradar-celery
+    command: celery -A core.tasks worker --loglevel=info -E --concurrency=2
+    environment:
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_USER: ${DB_USER}
+      DB_PASS: ${DB_PASS}
+      DB_NAME: ${DB_NAME}
+      REDIS_URL: redis://redis:6379/0
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
+      GEMINI_API_KEY: ${GEMINI_API_KEY}
+    depends_on:
+      - redis
+      - mysql
+    volumes:
+      - chroma_data:/app/chroma_db
+    networks:
+      - tenderradar
+    restart: unless-stopped
+
+volumes:
+  mysql_data:
+  redis_data:
+  chroma_data:
+  artifacts_data:
+
+networks:
+  tenderradar:
+    driver: bridge

@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const config = {
+  output: "standalone",
   // NOTE: /api/proxy/* is handled by the Route Handler at
   // src/app/api/proxy/[...path]/route.ts which injects the API key
   // server-side. Do NOT add a rewrite here — it would bypass the Route
