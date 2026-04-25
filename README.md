@@ -1,5 +1,8 @@
 # TenderRadar — Intelligent Tender Monitoring System
 
+[![CI](https://github.com/rajnishpanwar05/tenderradar/actions/workflows/ci.yml/badge.svg)](https://github.com/rajnishpanwar05/tenderradar/actions/workflows/ci.yml)
+[![Code Quality & Security](https://github.com/rajnishpanwar05/tenderradar/actions/workflows/quality.yml/badge.svg)](https://github.com/rajnishpanwar05/tenderradar/actions/workflows/quality.yml)
+
 > **Production ML system** for international development consulting firms.  
 > Monitors tender portals globally, scores opportunities with ML, and surfaces bids via semantic search + RAG chatbot.
 
