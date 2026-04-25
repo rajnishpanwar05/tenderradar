@@ -75,9 +75,7 @@ export function TenderTable({
               >
                 {/* Portal */}
                 <td className="px-4 py-3.5">
-                  <span className="text-[10px] font-medium uppercase tracking-wide text-slate-600 bg-slate-100 border border-slate-200 px-2 py-0.5 rounded whitespace-nowrap">
-                    {portalLabel(t.source_site)}
-                  </span>
+                  <PortalBadge name={t.source_site} />
                 </td>
 
                 {/* Title */}
@@ -94,14 +92,7 @@ export function TenderTable({
 
                 {/* Score */}
                 <td className="px-4 py-3.5">
-                  <span className={cn(
-                    "inline-flex items-center justify-center w-10 h-7 text-xs font-semibold rounded border",
-                    score >= 80 ? "bg-emerald-50 text-emerald-700 border-emerald-200" :
-                    score >= 60 ? "bg-amber-50 text-amber-700 border-amber-200" :
-                    "bg-slate-100 text-slate-600 border-slate-200"
-                  )}>
-                    {score}
-                  </span>
+                  <ScoreBadge score={score} />
                 </td>
 
                 {/* Sector */}
@@ -130,6 +121,41 @@ export function TenderTable({
         </tbody>
       </table>
     </div>
+  );
+}
+
+const PORTAL_COLORS: Record<string, string> = {
+  gem:    "bg-blue-50 text-blue-700 border-blue-200",
+  ungm:   "bg-violet-50 text-violet-700 border-violet-200",
+  undp:   "bg-cyan-50 text-cyan-700 border-cyan-200",
+  wb:     "bg-emerald-50 text-emerald-700 border-emerald-200",
+  adb:    "bg-orange-50 text-orange-700 border-orange-200",
+  afdb:   "bg-amber-50 text-amber-700 border-amber-200",
+  eu:     "bg-indigo-50 text-indigo-700 border-indigo-200",
+  usaid:  "bg-red-50 text-red-700 border-red-200",
+};
+
+function PortalBadge({ name }: { name: string }) {
+  const key = (name || "").toLowerCase().replace(/[^a-z]/g, "");
+  const cls = Object.entries(PORTAL_COLORS).find(([k]) => key.includes(k))?.[1]
+    ?? "bg-slate-100 text-slate-600 border-slate-200";
+  return (
+    <span className={cn("text-[10px] font-semibold uppercase tracking-wide px-2 py-0.5 rounded border whitespace-nowrap", cls)}>
+      {portalLabel(name)}
+    </span>
+  );
+}
+
+function ScoreBadge({ score }: { score: number }) {
+  return (
+    <span className={cn(
+      "inline-flex items-center justify-center w-10 h-7 text-xs font-bold rounded border",
+      score >= 80 ? "bg-emerald-50 text-emerald-700 border-emerald-200" :
+      score >= 60 ? "bg-amber-50 text-amber-700 border-amber-200" :
+      "bg-slate-100 text-slate-600 border-slate-200"
+    )}>
+      {score}
+    </span>
   );
 }
 

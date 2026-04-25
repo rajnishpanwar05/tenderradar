@@ -1,33 +1,5 @@
 [
   {
-    "date": "2026-03-21",
-    "scraped": 500,
-    "accepted": 486,
-    "pass_rate": 0.972,
-    "avg_quality": 38.6
-  },
-  {
-    "date": "2026-03-22",
-    "scraped": 500,
-    "accepted": 485,
-    "pass_rate": 0.97,
-    "avg_quality": 38.9
-  },
-  {
-    "date": "2026-03-23",
-    "scraped": 500,
-    "accepted": 486,
-    "pass_rate": 0.972,
-    "avg_quality": 38.5
-  },
-  {
-    "date": "2026-03-24",
-    "scraped": 500,
-    "accepted": 483,
-    "pass_rate": 0.966,
-    "avg_quality": 38.8
-  },
-  {
     "date": "2026-03-25",
     "scraped": 500,
     "accepted": 486,
@@ -194,5 +166,47 @@
     "accepted": 486,
     "pass_rate": 0.972,
     "avg_quality": 37.8
+  },
+  {
+    "date": "2026-04-20",
+    "scraped": 500,
+    "accepted": 484,
+    "pass_rate": 0.968,
+    "avg_quality": 37.9
+  },
+  {
+    "date": "2026-04-21",
+    "scraped": 500,
+    "accepted": 493,
+    "pass_rate": 0.986,
+    "avg_quality": 37.7
+  },
+  {
+    "date": "2026-04-22",
+    "scraped": 500,
+    "accepted": 489,
+    "pass_rate": 0.978,
+    "avg_quality": 37.5
+  },
+  {
+    "date": "2026-04-23",
+    "scraped": 500,
+    "accepted": 490,
+    "pass_rate": 0.98,
+    "avg_quality": 37.6
+  },
+  {
+    "date": "2026-04-24",
+    "scraped": 500,
+    "accepted": 488,
+    "pass_rate": 0.976,
+    "avg_quality": 38.0
+  },
+  {
+    "date": "2026-04-25",
+    "scraped": 500,
+    "accepted": 482,
+    "pass_rate": 0.964,
+    "avg_quality": 38.2
   }
 ]

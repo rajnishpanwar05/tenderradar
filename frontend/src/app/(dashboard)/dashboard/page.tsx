@@ -6,8 +6,8 @@ import { DashboardPage } from "@/components/dashboard/DashboardPage";
 export const metadata = { title: "Dashboard — ProcureIQ" };
 
 export default async function RootPage() {
-  // Fetch summary server-side for immediate render (no flash)
-  const summary = await apiClient.server.getSummary().catch(() => undefined);
+  // Fetch stats server-side for immediate render (no flash)
+  const stats = await apiClient.server.getStats().catch(() => undefined);
 
   return (
     <Suspense
@@ -22,7 +22,7 @@ export default async function RootPage() {
         </div>
       }
     >
-      <DashboardPage fallback={summary} />
+      <DashboardPage fallback={stats} />
     </Suspense>
   );
 }

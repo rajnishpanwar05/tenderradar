@@ -1,22 +1,20 @@
 "use client";
 
-import { useSummary } from "@/hooks/useSummary";
+import { useStats } from "@/hooks/useStats";
 import { useTenders } from "@/hooks/useTenders";
-import { usePortals } from "@/hooks/usePortals";
-import type { SummaryResponse, TenderIntelItem, PortalStats } from "@/lib/api-types";
+import type { SystemStats, TenderIntelItem, PortalStats } from "@/lib/api-types";
 import { portalLabel, sectorLabel } from "@/lib/constants";
 import { useRouter } from "next/navigation";
-import { FileText, Globe, AlertTriangle, Clock, ChevronRight, ExternalLink } from "lucide-react";
+import { FileText, Globe, TrendingUp, Clock, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-export function DashboardPage({ fallback }: { fallback?: SummaryResponse }) {
+export function DashboardPage({ fallback }: { fallback?: SystemStats }) {
   const router = useRouter();
-  const { data, isLoading } = useSummary(fallback);
+  const { data, isLoading } = useStats(fallback);
   const { data: tendersData, isLoading: tendersLoading } = useTenders({ page_size: 10, page: 1 });
-  const { data: portalData } = usePortals();
 
   const topTenders = tendersData?.results ?? [];
-  const portals = portalData ?? [];
+  const portals = data?.portal_breakdown ?? [];
 
   return (
     <div className="p-6 lg:p-8 max-w-7xl mx-auto space-y-6">
@@ -27,23 +25,29 @@ export function DashboardPage({ fallback }: { fallback?: SummaryResponse }) {
           title="Total Tenders"
           value={isLoading ? null : (data?.total_tenders ?? 0)}
           icon={FileText}
+          accent="blue"
+          trend="up"
         />
         <StatCard
           title="Active Portals"
-          value={isLoading ? null : (data?.portals_active ?? 0)}
+          value={isLoading ? null : (data?.total_portals ?? 0)}
           icon={Globe}
+          accent="purple"
+          trend="up"
         />
         <StatCard
-          title="High Priority"
-          value={isLoading ? null : (data?.high_priority_count ?? 0)}
-          icon={AlertTriangle}
+          title="New This Week"
+          value={isLoading ? null : (data?.tenders_last_7_days ?? 0)}
+          icon={TrendingUp}
           accent="amber"
+          trend="up"
         />
         <StatCard
-          title="Today's New"
-          value={isLoading ? null : (data?.deadline_breakdown?.closing_soon?.total ?? 0)}
+          title="New Today"
+          value={isLoading ? null : (data?.tenders_last_24h ?? 0)}
           icon={Clock}
           accent="emerald"
+          trend="up"
         />
       </div>
 
@@ -114,32 +118,58 @@ export function DashboardPage({ fallback }: { fallback?: SummaryResponse }) {
 
 // ---------------------------------------------------------------------------
 
+const ACCENT_STYLES = {
+  blue:    { border: "border-l-blue-500",    bg: "bg-blue-50",    icon: "text-blue-600"    },
+  green:   { border: "border-l-emerald-500", bg: "bg-emerald-50", icon: "text-emerald-600" },
+  amber:   { border: "border-l-amber-500",   bg: "bg-amber-50",   icon: "text-amber-600"   },
+  purple:  { border: "border-l-purple-500",  bg: "bg-purple-50",  icon: "text-purple-600"  },
+  emerald: { border: "border-l-emerald-500", bg: "bg-emerald-50", icon: "text-emerald-600" },
+};
+
 function StatCard({
-  title, value, icon: Icon, accent,
+  title, value, icon: Icon, accent, trend,
 }: {
   title: string;
   value: number | null;
   icon: React.ComponentType<{ className?: string }>;
-  accent?: "amber" | "emerald";
+  accent?: keyof typeof ACCENT_STYLES;
+  trend?: "up" | "down";
 }) {
+  const s = accent ? ACCENT_STYLES[accent] : ACCENT_STYLES.blue;
+  const sparkHeights = [30, 55, 40, 70, 90];
   return (
-    <div className="bg-white border border-slate-200 rounded-lg shadow-sm p-5">
+    <div className={cn("stat-card border-l-4", s.border)}>
       <div className="flex items-center justify-between mb-3">
         <p className="text-xs font-medium text-slate-500 uppercase tracking-wide">{title}</p>
-        <div className={cn(
-          "w-8 h-8 rounded-md flex items-center justify-center",
-          accent === "amber"   ? "bg-amber-50"   : accent === "emerald" ? "bg-emerald-50" : "bg-slate-100"
-        )}>
-          <Icon className={cn(
-            "w-4 h-4",
-            accent === "amber"   ? "text-amber-600"   : accent === "emerald" ? "text-emerald-600" : "text-slate-500"
-          )} />
+        <div className={cn("w-8 h-8 rounded-md flex items-center justify-center", s.bg)}>
+          <Icon className={cn("w-4 h-4", s.icon)} />
         </div>
       </div>
       {value === null ? (
-        <div className="h-8 w-20 bg-slate-100 rounded animate-pulse" />
+        <div className="h-9 w-24 bg-slate-100 rounded animate-pulse" />
       ) : (
-        <p className="text-2xl font-semibold text-slate-900 tabular-nums">{value.toLocaleString()}</p>
+        <div className="flex items-end justify-between">
+          <div>
+            <p className="text-3xl font-bold text-slate-900 tabular-nums leading-none">
+              {value.toLocaleString()}
+            </p>
+            {trend === "up" && (
+              <p className="text-xs text-emerald-600 font-medium mt-1 flex items-center gap-0.5">
+                <span>↑</span> <span>Live data</span>
+              </p>
+            )}
+          </div>
+          {/* Sparkline */}
+          <div className="flex items-end gap-0.5 h-8 pb-0.5">
+            {sparkHeights.map((h, i) => (
+              <div
+                key={i}
+                className={cn("w-1 rounded-sm opacity-40", s.bg.replace("bg-", "bg-"))}
+                style={{ height: `${h}%`, backgroundColor: s.icon.includes("blue") ? "#3b82f6" : s.icon.includes("amber") ? "#f59e0b" : s.icon.includes("purple") ? "#a855f7" : "#10b981" }}
+              />
+            ))}
+          </div>
+        </div>
       )}
     </div>
   );

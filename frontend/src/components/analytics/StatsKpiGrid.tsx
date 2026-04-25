@@ -15,24 +15,28 @@ export function StatsKpiGrid({ stats }: StatsKpiGridProps) {
         value={stats.total_tenders}
         icon={FileText}
         subtitle="Across all tracked portals"
+        accent="blue"
       />
       <KpiCard
         title="Discovered (24h)"
         value={stats.tenders_last_24h}
         icon={Clock}
         subtitle="Newly published today"
+        accent="cyan"
       />
       <KpiCard
         title="Past 7 Days"
         value={stats.tenders_last_7_days}
         icon={Calendar}
         subtitle="Active pipeline volume"
+        accent="violet"
       />
       <KpiCard
         title="High Match"
         value={stats.high_fit_count}
         icon={Star}
         subtitle="Score ≥ 80"
+        accent="amber"
       />
     </div>
   );
