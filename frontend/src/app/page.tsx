@@ -107,7 +107,7 @@ function HeroSection() {
           transition={{ duration: 0.8, delay: 0.2, ease }}
           className="text-xl md:text-2xl text-slate-400 max-w-2xl font-light leading-relaxed mb-12"
         >
-          A highly colorful, intelligent engine that perfectly maps global procurement data directly to your firm's capabilities.
+          An AI-powered procurement intelligence platform that monitors 26+ global portals and surfaces the highest-fit opportunities for your firm.
         </motion.p>
 
         <motion.div
@@ -275,7 +275,7 @@ function Navbar() {
     >
       <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
         <Link href="/" className="font-black text-lg tracking-tight flex items-center gap-2 text-white">
-          <div className="w-3 h-3 bg-indigo-500 rounded-sm shadow-[0_0_10px_rgba(99,102,241,0.8)]" /> TenderRadar
+          <div className="w-3 h-3 bg-indigo-500 rounded-sm shadow-[0_0_10px_rgba(99,102,241,0.8)]" /> ProcureIQ
         </Link>
         <Link href="/dashboard" className="text-sm font-bold text-slate-300 hover:text-white transition-colors">
           Sign In
