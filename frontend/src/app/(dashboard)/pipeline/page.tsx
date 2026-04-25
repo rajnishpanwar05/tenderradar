@@ -2,7 +2,7 @@ export const dynamic = "force-dynamic";
 import { Suspense } from "react";
 import { PipelinePage } from "@/components/pipeline/PipelinePage";
 
-export const metadata = { title: "Pipeline — TenderRadar" };
+export const metadata = { title: "Pipeline — ProcureIQ" };
 
 export default function Pipeline() {
   return (

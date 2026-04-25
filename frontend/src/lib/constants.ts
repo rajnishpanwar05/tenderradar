@@ -157,12 +157,12 @@ export const SECTOR_CHART_COLORS: Record<string, string> = {
 // ---------------------------------------------------------------------------
 
 export const NAV_ITEMS = [
-  { label: "Command Center", href: "/dashboard", icon: "LayoutDashboard" },
-  { label: "Tenders",        href: "/tenders",   icon: "FileText" },
-  { label: "Scout AI",       href: "/chat",      icon: "MessageCircle" },
-  { label: "Pipeline",       href: "/pipeline",  icon: "Kanban" },
-  { label: "Analytics",      href: "/analytics", icon: "BarChart2" },
-  { label: "Portals",        href: "/portals",   icon: "Globe" },
+  { label: "Dashboard",   href: "/dashboard", icon: "LayoutDashboard" },
+  { label: "Tenders",     href: "/tenders",   icon: "FileText" },
+  { label: "Analytics",   href: "/analytics", icon: "BarChart2" },
+  { label: "Portals",     href: "/portals",   icon: "Globe" },
+  { label: "Pipeline",    href: "/pipeline",  icon: "Kanban" },
+  { label: "AI Analyst",  href: "/chat",      icon: "MessageCircle" },
 ] as const;
 
 // ---------------------------------------------------------------------------

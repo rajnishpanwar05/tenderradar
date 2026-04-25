@@ -5,12 +5,11 @@ import { Sidebar } from "@/components/layout/Sidebar";
 import { TopBar } from "@/components/layout/TopBar";
 import { MobileNav } from "@/components/layout/MobileNav";
 import { CommandPalette } from "@/components/ui/CommandPalette";
-import { cn } from "@/lib/utils";
 
 const COLLAPSED_KEY = "sidebar_collapsed";
 
 export function AppShell({ children }: { children: React.ReactNode }) {
-  const [collapsed, setCollapsed] = useState(true);
+  const [collapsed, setCollapsed] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
   useEffect(() => {
@@ -27,33 +26,30 @@ export function AppShell({ children }: { children: React.ReactNode }) {
   };
 
   return (
-    <div className="flex h-screen overflow-hidden bg-transparent text-slate-900 relative selection:bg-slate-900/10 selection:text-slate-950">
-      <div className="flex w-full h-full relative z-10">
-        <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,rgba(148,163,184,0.08)_1px,transparent_1px),linear-gradient(to_bottom,rgba(148,163,184,0.08)_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:linear-gradient(to_bottom,black_18%,transparent_95%)] opacity-40" />
+    <div className="flex h-screen overflow-hidden bg-[#f8fafc] text-slate-900">
+      {/* Desktop Sidebar — fixed 240px or 64px collapsed */}
+      <aside
+        className={
+          "hidden md:flex flex-col flex-shrink-0 bg-white border-r border-slate-200 transition-all duration-200 " +
+          (collapsed ? "w-16" : "w-60")
+        }
+      >
+        <Sidebar collapsed={collapsed} />
+      </aside>
 
-        {/* Desktop Sidebar */}
-        <aside className={cn(
-          "hidden md:flex flex-col flex-shrink-0 glass-sidebar shadow-[4px_0_24px_rgba(15,23,42,0.04)]",
-          "transition-all duration-300 ease-in-out",
-          collapsed ? "w-16" : "w-56"
-        )}>
-          <Sidebar collapsed={collapsed} />
-        </aside>
+      <MobileNav open={mobileOpen} onClose={() => setMobileOpen(false)} />
 
-        <MobileNav open={mobileOpen} onClose={() => setMobileOpen(false)} />
-
-        {/* Main Content Area */}
-        <div className="flex flex-col flex-1 min-w-0 overflow-hidden relative">
-          <TopBar
-            onToggleSidebar={toggleSidebar}
-            onOpenMobileNav={() => setMobileOpen(true)}
-            sidebarCollapsed={collapsed}
-          />
-          <CommandPalette />
-          <main className="flex-1 overflow-y-auto scrollbar-thin relative z-10 p-4 md:p-8 lg:p-10">
-            {children}
-          </main>
-        </div>
+      {/* Main column */}
+      <div className="flex flex-col flex-1 min-w-0 overflow-hidden">
+        <TopBar
+          onToggleSidebar={toggleSidebar}
+          onOpenMobileNav={() => setMobileOpen(true)}
+          sidebarCollapsed={collapsed}
+        />
+        <CommandPalette />
+        <main className="flex-1 overflow-y-auto scrollbar-thin bg-[#f8fafc]">
+          {children}
+        </main>
       </div>
     </div>
   );

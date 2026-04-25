@@ -3,7 +3,7 @@ import { Suspense } from "react";
 import { apiClient } from "@/lib/api";
 import { DashboardPage } from "@/components/dashboard/DashboardPage";
 
-export const metadata = { title: "Dashboard — TenderRadar" };
+export const metadata = { title: "Dashboard — ProcureIQ" };
 
 export default async function RootPage() {
   // Fetch summary server-side for immediate render (no flash)

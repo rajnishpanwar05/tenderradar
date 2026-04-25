@@ -11,45 +11,23 @@ interface KpiCardProps {
   className?: string;
 }
 
-const ACCENT_CONFIG = {
-  blue:    { dot: "bg-slate-900" },
-  cyan:    { dot: "bg-slate-700" },
-  violet:  { dot: "bg-slate-800" },
-  amber:   { dot: "bg-slate-700" },
-  emerald: { dot: "bg-slate-900" },
-  rose:    { dot: "bg-slate-800" },
-};
-
-export function KpiCard({ title, value, subtitle, icon: Icon, accent = "blue", className }: KpiCardProps) {
-  const cfg = ACCENT_CONFIG[accent];
-
+export function KpiCard({ title, value, subtitle, icon: Icon, className }: KpiCardProps) {
   return (
     <div className={cn(
-      "relative shell-panel glass-hover rounded-2xl p-5 overflow-hidden",
+      "bg-white border border-slate-200 rounded-lg shadow-sm p-5",
       className
     )}>
-      {/* Ambient glow */}
-      <div className={cn(
-        "absolute -top-6 -right-6 w-24 h-24 rounded-full blur-2xl opacity-10",
-        cfg.dot
-      )} />
-
-      {/* Top row */}
-      <div className="relative flex items-start justify-between mb-4">
-        <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider">{title}</p>
-        <div className={cn("w-8 h-8 rounded-lg flex items-center justify-center shadow-sm flex-shrink-0 border border-slate-200 bg-slate-50", cfg.dot)}>
-          <Icon className="w-4 h-4 text-white" />
+      <div className="flex items-center justify-between mb-3">
+        <p className="text-xs font-medium text-slate-500 uppercase tracking-wide">{title}</p>
+        <div className="w-8 h-8 rounded-md bg-slate-100 flex items-center justify-center flex-shrink-0">
+          <Icon className="w-4 h-4 text-slate-500" />
         </div>
       </div>
-
-      {/* Value */}
-      <p className="relative text-3xl font-semibold tracking-tight tabular-nums font-mono text-slate-900">
+      <p className="text-2xl font-semibold tracking-tight tabular-nums text-slate-900">
         {formatNumber(value)}
       </p>
-
-      {/* Subtitle */}
       {subtitle && (
-        <p className="relative mt-1.5 text-[11px] text-slate-500">{subtitle}</p>
+        <p className="mt-1 text-xs text-slate-500">{subtitle}</p>
       )}
     </div>
   );

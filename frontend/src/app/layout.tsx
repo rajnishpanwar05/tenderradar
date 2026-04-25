@@ -6,8 +6,8 @@ import "@/app/globals.css";
 
 export const metadata: Metadata = {
   title: {
-    default:  "TenderRadar — Procurement Intelligence",
-    template: "%s — TenderRadar",
+    default:  "ProcureIQ — Procurement Intelligence",
+    template: "%s — ProcureIQ",
   },
   description:
     "AI-powered tender monitoring and relevance scoring for development consulting firms.",

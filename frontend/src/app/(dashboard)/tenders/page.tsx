@@ -4,7 +4,7 @@ import { Suspense } from "react";
 import { TenderListPage } from "@/components/tenders/TenderListPage";
 
 export const metadata: Metadata = {
-  title: "Tenders — TenderRadar",
+  title: "Tenders — ProcureIQ",
   description: "Browse procurement tenders from 25+ portals, ranked by priority score.",
 };
 

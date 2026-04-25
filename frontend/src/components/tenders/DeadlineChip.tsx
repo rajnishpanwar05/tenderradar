@@ -11,15 +11,15 @@ import { getDeadlineInfo } from "@/lib/format";
 export const DEADLINE_CATEGORY_CONFIG = {
   closing_soon: {
     label: "Closing Soon",
-    cls:   "bg-orange-50 text-orange-700 border-orange-200 dark:bg-orange-900/30 dark:text-orange-400",
+    cls:   "bg-slate-100 text-slate-700 border-slate-200",
   },
   needs_action: {
     label: "Needs Action",
-    cls:   "bg-amber-50 text-amber-700 border-amber-200 dark:bg-amber-900/30 dark:text-amber-400",
+    cls:   "bg-slate-100 text-slate-700 border-slate-200",
   },
   plan_ahead: {
     label: "Plan Ahead",
-    cls:   "bg-slate-50 text-slate-600 border-slate-200 dark:bg-slate-800 dark:text-slate-400",
+    cls:   "bg-slate-50 text-slate-600 border-slate-200",
   },
   unknown: {
     label: "—",
@@ -28,15 +28,15 @@ export const DEADLINE_CATEGORY_CONFIG = {
   // Legacy values (stored before the rename) — map to nearest new bucket
   urgent: {
     label: "Closing Soon",
-    cls:   "bg-orange-50 text-orange-700 border-orange-200 dark:bg-orange-900/30 dark:text-orange-400",
+    cls:   "bg-slate-100 text-slate-700 border-slate-200",
   },
   soon: {
     label: "Needs Action",
-    cls:   "bg-amber-50 text-amber-700 border-amber-200 dark:bg-amber-900/30 dark:text-amber-400",
+    cls:   "bg-slate-100 text-slate-700 border-slate-200",
   },
   normal: {
     label: "Plan Ahead",
-    cls:   "bg-slate-50 text-slate-600 border-slate-200 dark:bg-slate-800 dark:text-slate-400",
+    cls:   "bg-slate-50 text-slate-600 border-slate-200",
   },
 } as const;
 
@@ -50,10 +50,10 @@ export function DeadlineChip({ deadline, isExpired, className }: DeadlineChipPro
   const info = getDeadlineInfo(deadline, isExpired);
 
   if (info.urgency === "none") {
-    return (
-      <span
-        className={cn(
-          "inline-flex items-center rounded-full border bg-muted px-2.5 py-0.5 text-xs text-muted-foreground",
+      return (
+        <span
+          className={cn(
+          "inline-flex items-center rounded-full border bg-slate-50 px-2.5 py-0.5 text-xs text-slate-500",
           className
         )}
       >
@@ -63,10 +63,10 @@ export function DeadlineChip({ deadline, isExpired, className }: DeadlineChipPro
   }
 
   if (info.urgency === "expired") {
-    return (
-      <span
-        className={cn(
-          "inline-flex items-center rounded-full border border-red-200 bg-red-50 px-2.5 py-0.5 text-xs font-medium text-red-700 dark:border-red-800 dark:bg-red-900/30 dark:text-red-400",
+      return (
+        <span
+          className={cn(
+          "inline-flex items-center rounded-full border border-slate-200 bg-slate-100 px-2.5 py-0.5 text-xs font-medium text-slate-700",
           className
         )}
       >
@@ -76,15 +76,15 @@ export function DeadlineChip({ deadline, isExpired, className }: DeadlineChipPro
   }
 
   if (info.urgency === "closing_soon") {
-    return (
-      <span
-        className={cn(
-          "inline-flex items-center gap-1.5 rounded-full border border-orange-200 bg-orange-50 px-2.5 py-0.5 text-xs font-medium text-orange-700 dark:border-orange-800 dark:bg-orange-900/30 dark:text-orange-400",
+      return (
+        <span
+          className={cn(
+          "inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-slate-100 px-2.5 py-0.5 text-xs font-medium text-slate-700",
           className
         )}
       >
         <span
-          className="h-1.5 w-1.5 animate-pulse rounded-full bg-orange-500"
+          className="h-1.5 w-1.5 animate-pulse rounded-full bg-slate-700"
           aria-hidden="true"
         />
         {info.label}
@@ -93,10 +93,10 @@ export function DeadlineChip({ deadline, isExpired, className }: DeadlineChipPro
   }
 
   if (info.urgency === "needs_action") {
-    return (
-      <span
-        className={cn(
-          "inline-flex items-center rounded-full border border-amber-200 bg-amber-50 px-2.5 py-0.5 text-xs font-medium text-amber-700 dark:border-amber-800 dark:bg-amber-900/30 dark:text-amber-400",
+      return (
+        <span
+          className={cn(
+          "inline-flex items-center rounded-full border border-slate-200 bg-slate-100 px-2.5 py-0.5 text-xs font-medium text-slate-700",
           className
         )}
       >
@@ -109,7 +109,7 @@ export function DeadlineChip({ deadline, isExpired, className }: DeadlineChipPro
   return (
     <span
       className={cn(
-        "inline-flex items-center rounded-full border bg-background px-2.5 py-0.5 text-xs text-muted-foreground",
+        "inline-flex items-center rounded-full border bg-white px-2.5 py-0.5 text-xs text-slate-500",
         className
       )}
     >

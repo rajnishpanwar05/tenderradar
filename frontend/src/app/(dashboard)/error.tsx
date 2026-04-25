@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import Link from "next/link";
 
 export default function DashboardError({
   error,
@@ -15,21 +16,27 @@ export default function DashboardError({
 
   return (
     <div className="flex flex-col items-center justify-center min-h-[60vh] gap-5 text-center px-4">
-      <div className="flex h-16 w-16 items-center justify-center rounded-2xl border border-red-500/20 bg-red-500/10">
-        <span className="text-3xl">⚠</span>
-      </div>
-      <div>
-        <p className="text-xl font-semibold text-white/80">Something went wrong</p>
-        <p className="mt-1 text-sm text-white/40 max-w-sm">
+      <div className="bg-white border border-slate-200 rounded-lg shadow-sm px-8 py-10 max-w-sm w-full">
+        <p className="text-sm font-semibold text-red-600 mb-1">Error</p>
+        <p className="text-base font-semibold text-slate-900 mb-2">Something went wrong</p>
+        <p className="text-sm text-slate-500 mb-6">
           {error.message || "An unexpected error occurred. Please try again."}
         </p>
+        <div className="flex items-center justify-center gap-3">
+          <button
+            onClick={reset}
+            className="inline-flex h-9 items-center justify-center rounded-md bg-slate-900 px-4 text-sm font-medium text-white hover:bg-slate-800 transition-colors"
+          >
+            Try again
+          </button>
+          <Link
+            href="/dashboard"
+            className="inline-flex h-9 items-center justify-center rounded-md border border-slate-200 bg-white px-4 text-sm font-medium text-slate-700 hover:bg-slate-50 transition-colors"
+          >
+            Dashboard
+          </Link>
+        </div>
       </div>
-      <button
-        onClick={reset}
-        className="rounded-lg border border-white/10 bg-white/[0.06] px-5 py-2 text-sm font-medium text-white/70 hover:bg-white/[0.10] hover:text-white/90 transition-all"
-      >
-        Try again
-      </button>
     </div>
   );
 }

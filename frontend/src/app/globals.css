@@ -4,135 +4,54 @@
 
 @layer base {
   :root {
-    --background: 210 40% 98%;
+    --background: 0 0% 100%;
     --foreground: 222 47% 11%;
     --card: 0 0% 100%;
     --card-foreground: 222 47% 11%;
     --popover: 0 0% 100%;
     --popover-foreground: 222 47% 11%;
-    --primary: 214 84% 34%;
+    --primary: 222 47% 11%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 214 32% 94%;
+    --secondary: 210 40% 96%;
     --secondary-foreground: 222 47% 11%;
-    --muted: 214 32% 95%;
+    --muted: 210 40% 96%;
     --muted-foreground: 215 16% 47%;
-    --accent: 214 32% 94%;
+    --accent: 210 40% 96%;
     --accent-foreground: 222 47% 11%;
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
-    --border: 214 24% 88%;
-    --input: 214 24% 88%;
-    --ring: 214 84% 34%;
-    --radius: 0.85rem;
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 222 47% 11%;
+    --radius: 0.5rem;
   }
 }
 
 html {
   color-scheme: light;
-  background:
-    radial-gradient(circle at top left, rgba(15, 23, 42, 0.04), transparent 28%),
-    linear-gradient(180deg, #f8fafc 0%, #eef3f8 100%);
 }
 
 @layer base {
-  * { @apply border-gray-200; }
+  * { @apply border-slate-200; }
   body {
-    @apply bg-slate-50 text-slate-900 antialiased;
+    @apply bg-[#f8fafc] text-slate-900 antialiased;
     font-feature-settings: "rlig" 1, "calt" 1;
   }
 }
 
-/* Dashboard app styles (light corporate) — scoped */
-.app-shell {
-  color-scheme: light;
-  background:
-    radial-gradient(circle at top right, rgba(30, 64, 175, 0.06), transparent 32%),
-    radial-gradient(circle at bottom left, rgba(15, 118, 110, 0.05), transparent 28%),
-    linear-gradient(180deg, #f7f9fc 0%, #eef3f8 100%);
-  color: #0f172a;
-}
-.app-shell * { border-color: rgba(148, 163, 184, 0.22); }
-
-.glass {
-  background: rgba(255,255,255,0.78);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(8px);
-  border: 1px solid rgba(148,163,184,0.18);
-}
-.glass-sidebar {
-  background: rgba(255,255,255,0.84);
-  border-right: 1px solid rgba(148,163,184,0.22);
-}
-.glass-topbar {
-  background: rgba(255,255,255,0.85);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(148,163,184,0.18);
-}
-.glass-hover { transition: all 150ms ease; }
-.glass-hover:hover { background: rgba(255,255,255,0.96); border-color: rgba(148,163,184,0.32); }
-
-.shell-panel {
-  background: rgba(255, 255, 255, 0.84);
-  border: 1px solid rgba(148, 163, 184, 0.18);
-  box-shadow: 0 18px 45px rgba(15, 23, 42, 0.06);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-}
-
-.shell-panel-strong {
-  background: #ffffff;
-  border: 1px solid rgba(148, 163, 184, 0.2);
-  box-shadow: 0 20px 50px rgba(15, 23, 42, 0.08);
-}
-
-.shell-surface {
-  background:
-    linear-gradient(180deg, rgba(255,255,255,0.9) 0%, rgba(248,250,252,0.96) 100%);
-  border: 1px solid rgba(148, 163, 184, 0.18);
-}
-
+/* Thin scrollbar */
 .scrollbar-thin {
   scrollbar-width: thin;
-  scrollbar-color: #94a3b8 transparent;
+  scrollbar-color: #cbd5e1 transparent;
 }
-.scrollbar-thin::-webkit-scrollbar { width:4px; height:4px; }
-.scrollbar-thin::-webkit-scrollbar-track { background:transparent; }
-.scrollbar-thin::-webkit-scrollbar-thumb { background:#94a3b8; border-radius:4px; }
-.scrollbar-thin::-webkit-scrollbar-thumb:hover { background:#64748b; }
+.scrollbar-thin::-webkit-scrollbar { width: 4px; height: 4px; }
+.scrollbar-thin::-webkit-scrollbar-track { background: transparent; }
+.scrollbar-thin::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+.scrollbar-thin::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
 
-/* ── Logo marquee (pure CSS, zero lag) ─────────────────────────── */
-@keyframes marquee {
-  0%   { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-.animate-marquee {
-  display: flex;
-  width: max-content;
-  animation: marquee 32s linear infinite;
-}
-.animate-marquee:hover { animation-play-state: paused; }
-
-/* ── Subtle fade-in ─────────────────────────────────────────────── */
+/* Fade-up animation */
 @keyframes fade-up {
-  from { opacity:0; transform:translateY(16px); }
-  to   { opacity:1; transform:translateY(0); }
-}
-.animate-fade-up { animation: fade-up 0.5s cubic-bezier(0.25,0.46,0.45,0.94) both; }
-
-@keyframes soft-rise {
   from { opacity: 0; transform: translateY(12px); }
-  to { opacity: 1; transform: translateY(0); }
+  to   { opacity: 1; transform: translateY(0); }
 }
-.animate-soft-rise { animation: soft-rise 0.45s ease-out both; }
-
-/* ── Shimmer (for skeleton states) ─────────────────────────────── */
-@keyframes shimmer {
-  0%   { background-position:-200% center; }
-  100% { background-position: 200% center; }
-}
-.shimmer {
-  background: linear-gradient(90deg,rgba(0,0,0,0.04) 25%,rgba(0,0,0,0.08) 50%,rgba(0,0,0,0.04) 75%);
-  background-size: 200% auto;
-  animation: shimmer 1.5s ease infinite;
-}
+.animate-fade-up { animation: fade-up 0.4s ease-out both; }

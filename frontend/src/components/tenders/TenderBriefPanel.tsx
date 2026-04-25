@@ -78,31 +78,31 @@ export function TenderBriefPanel({ tender }: TenderBriefPanelProps) {
   }
 
   return (
-    <Card>
+    <Card className="shadow-sm">
       <CardContent className="p-5 space-y-4">
         <div className="flex items-center gap-2">
-          <Sparkles className="h-4 w-4 text-primary" />
-          <h3 className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+          <Sparkles className="h-4 w-4 text-slate-700" />
+          <h3 className="text-xs font-semibold uppercase tracking-wide text-slate-500">
             AI Summary
           </h3>
         </div>
 
         {state === "loading" && (
-          <div className="rounded-lg border border-primary/15 bg-primary/5 p-4 text-center">
-            <Loader2 className="mx-auto h-5 w-5 animate-spin text-primary" />
-            <p className="mt-2 text-xs text-muted-foreground">
+          <div className="rounded-lg border border-slate-200 bg-white p-4 text-center">
+            <Loader2 className="mx-auto h-5 w-5 animate-spin text-slate-700" />
+            <p className="mt-2 text-xs text-slate-500">
               Generating a bid-ready summary…
             </p>
           </div>
         )}
 
         {state === "error" && (
-          <div className="rounded-lg border border-amber-200 bg-amber-50 p-3 text-xs text-amber-700 dark:border-amber-800 dark:bg-amber-900/20 dark:text-amber-300">
+          <div className="rounded-lg border border-slate-200 bg-white p-3 text-xs text-slate-600">
             <div className="flex items-start gap-2">
-              <AlertTriangle className="mt-0.5 h-4 w-4" />
+              <AlertTriangle className="mt-0.5 h-4 w-4 text-slate-500" />
               <div>
                 <p className="font-semibold">AI brief unavailable</p>
-                <p className="mt-1 text-muted-foreground">{error}</p>
+                <p className="mt-1 text-slate-500">{error}</p>
                 <Button variant="outline" size="sm" className="mt-2" onClick={loadBrief}>
                   Retry
                 </Button>
@@ -115,7 +115,7 @@ export function TenderBriefPanel({ tender }: TenderBriefPanelProps) {
           <div className="space-y-3 text-sm">
             <div>
               <p className="font-semibold">Summary</p>
-              <p className={cn("mt-1 text-muted-foreground", !fallbackSummary && "italic")}>
+              <p className={cn("mt-1 text-slate-500", !fallbackSummary && "italic")}>
                 {fallbackSummary || "No summary available yet."}
               </p>
             </div>
@@ -125,8 +125,8 @@ export function TenderBriefPanel({ tender }: TenderBriefPanelProps) {
                 <p className="font-semibold">Key Deliverables</p>
                 <ul className="mt-1 space-y-1">
                   {deliverables.map((item, i) => (
-                    <li key={i} className="flex items-start gap-2 text-muted-foreground">
-                      <CheckCircle2 className="mt-0.5 h-3.5 w-3.5 text-emerald-500" />
+                    <li key={i} className="flex items-start gap-2 text-slate-500">
+                      <CheckCircle2 className="mt-0.5 h-3.5 w-3.5 text-slate-700" />
                       <span>{item}</span>
                     </li>
                   ))}
@@ -139,8 +139,8 @@ export function TenderBriefPanel({ tender }: TenderBriefPanelProps) {
                 <p className="font-semibold">Next Steps</p>
                 <ul className="mt-1 space-y-1">
                   {nextSteps.map((step, i) => (
-                    <li key={i} className="flex items-start gap-2 text-muted-foreground">
-                      <ListChecks className="mt-0.5 h-3.5 w-3.5 text-blue-500" />
+                    <li key={i} className="flex items-start gap-2 text-slate-500">
+                      <ListChecks className="mt-0.5 h-3.5 w-3.5 text-slate-700" />
                       <span>{step}</span>
                     </li>
                   ))}
@@ -151,19 +151,19 @@ export function TenderBriefPanel({ tender }: TenderBriefPanelProps) {
         )}
 
         <div className="space-y-2 pt-1">
-          <Button className="w-full" onClick={(e) => handleTenderClick(e, tender)}>
+          <Button className="w-full bg-slate-900 text-white hover:bg-slate-800" onClick={(e) => handleTenderClick(e, tender)}>
             <ExternalLink className="mr-2 h-4 w-4" />
             Open Official Tender
           </Button>
-          <Button variant="outline" className="w-full" onClick={handleAddToPipeline}>
+          <Button variant="outline" className="w-full border-slate-200 bg-white text-slate-700 hover:bg-slate-50" onClick={handleAddToPipeline}>
             Add to Pipeline
           </Button>
           {pipelineMsg && (
-            <p className="text-xs text-muted-foreground">{pipelineMsg}</p>
+            <p className="text-xs text-slate-500">{pipelineMsg}</p>
           )}
           <Link
             href="/pipeline"
-            className="inline-flex w-full items-center justify-center rounded-md border border-border bg-background px-3 py-2 text-xs font-medium text-muted-foreground hover:text-foreground transition-colors"
+            className="inline-flex w-full items-center justify-center rounded-md border border-slate-200 bg-white px-3 py-2 text-xs font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-colors"
           >
             Open Project Workspace
           </Link>

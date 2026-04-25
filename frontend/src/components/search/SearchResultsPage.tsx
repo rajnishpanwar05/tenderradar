@@ -74,13 +74,13 @@ export function SearchResultsPage() {
       <div className="flex items-center gap-4">
         <button
           onClick={() => router.back()}
-          className="flex items-center justify-center h-8 w-8 shrink-0 rounded-md border border-[#222] bg-[#0a0a0a] text-neutral-400 hover:bg-[#1a1a1a] hover:text-white transition-colors"
+          className="flex items-center justify-center h-8 w-8 shrink-0 rounded-md border border-slate-200 bg-white text-slate-500 hover:bg-slate-50 hover:text-slate-900 transition-colors"
           title="Go back"
         >
           <ArrowLeft className="h-4 w-4" />
         </button>
         <div className="flex-1">
-          <h1 className="text-xl font-medium tracking-tight text-white flex items-center gap-2">
+          <h1 className="text-xl font-semibold tracking-tight text-slate-950 flex items-center gap-2">
             Opportunity Engine
           </h1>
         </div>
@@ -88,16 +88,16 @@ export function SearchResultsPage() {
 
       {/* ── Query shown + auto-detected filter chips ──────────────────────── */}
       {activeQuery && (
-        <div className="flex flex-col gap-4 border-b border-[#222] pb-6">
-          <div className="flex items-center gap-2 text-sm text-neutral-400 font-medium">
+        <div className="flex flex-col gap-4 border-b border-slate-200 pb-6">
+          <div className="flex items-center gap-2 text-sm text-slate-500 font-medium">
             {isLoading || isValidating ? (
               <span className="flex items-center gap-2">
-                <Activity className="h-4 w-4 animate-spin text-neutral-500" /> Querying index...
+                <Activity className="h-4 w-4 animate-spin text-slate-500" /> Querying index...
               </span>
             ) : data ? (
               <span>
-                {data.total} results <span className="text-neutral-600 px-1">/</span> <span className="text-white">"{data.query}"</span>
-                <span className="text-neutral-600 ml-3 text-xs">{data.query_ms}ms</span>
+                {data.total} results <span className="text-slate-300 px-1">/</span> <span className="text-slate-900">"{data.query}"</span>
+                <span className="text-slate-400 ml-3 text-xs">{data.query_ms}ms</span>
               </span>
             ) : null}
           </div>
@@ -105,16 +105,16 @@ export function SearchResultsPage() {
           {hasFilters && (
             <div className="flex flex-wrap items-center gap-2">
               {filters?.sectors?.map(s => (
-                <FilterChip key={s} icon={Layers} label={sectorLabel(s)} className="bg-[#111] text-neutral-300 border-[#333]" />
+                <FilterChip key={s} icon={Layers} label={sectorLabel(s)} className="bg-white text-slate-700 border-slate-200" />
               ))}
               {filters?.regions?.map(r => (
-                <FilterChip key={r} icon={Globe} label={r} className="bg-[#111] text-neutral-300 border-[#333]" />
+                <FilterChip key={r} icon={Globe} label={r} className="bg-white text-slate-700 border-slate-200" />
               ))}
               {filters?.priority_hint === "high" && (
-                <FilterChip icon={TrendingUp} label="High Priority" className="bg-[#220] text-amber-500 border-[#440]" />
+                <FilterChip icon={TrendingUp} label="High Priority" className="bg-white text-slate-700 border-slate-200" />
               )}
               {filters?.closing_soon && (
-                <FilterChip icon={Clock} label="Closing Soon" className="bg-[#220] text-amber-500 border-[#440]" />
+                <FilterChip icon={Clock} label="Closing Soon" className="bg-white text-slate-700 border-slate-200" />
               )}
             </div>
           )}
@@ -123,9 +123,9 @@ export function SearchResultsPage() {
 
       {/* ── Fallback notice ───────────────────────────────────────────────── */}
       {data?.fallback && (
-        <div className="flex items-start gap-3 rounded-md border border-[#440] bg-[#110] p-3">
-          <AlertCircle className="h-4 w-4 text-amber-500 mt-0.5 flex-shrink-0" />
-          <p className="text-xs text-amber-500/80 leading-relaxed">
+        <div className="flex items-start gap-3 rounded-md border border-amber-200 bg-amber-50 p-3">
+          <AlertCircle className="h-4 w-4 text-slate-600 mt-0.5 flex-shrink-0" />
+          <p className="text-xs text-slate-600 leading-relaxed">
              Keyword fallback activated. The semantic search index is being rebuilt in the background.
           </p>
         </div>
@@ -147,30 +147,30 @@ export function SearchResultsPage() {
               <button
                 key={t.tender_id + idx}
                 onClick={() => handleTenderClick(t.tender_id)}
-                className="group flex flex-col items-start gap-2 rounded-lg border border-[#222] bg-[#050505] p-4 text-left transition-all hover:bg-[#111] hover:border-[#333]"
+                className="group flex flex-col items-start gap-2 rounded-xl border border-slate-200 bg-white p-4 text-left transition-all hover:bg-slate-50 hover:border-slate-300 shadow-sm"
               >
                 <div className="flex w-full items-start justify-between gap-4">
                   <div className="space-y-1.5 flex-1">
-                    <h3 className="text-sm font-medium text-white leading-relaxed group-hover:text-blue-400 transition-colors">
+                    <h3 className="text-sm font-medium text-slate-900 leading-relaxed group-hover:text-slate-700 transition-colors">
                       {t.title}
                     </h3>
                   </div>
                   
                   {/* Score */}
-                  <div className="flex items-center gap-2 rounded-md bg-[#111] border border-[#222] px-2 py-1 shrink-0">
-                    <span className="text-xs font-semibold text-white">{matchScore}</span>
-                    <span className="text-[10px] text-neutral-500 uppercase tracking-widest font-medium">Rank</span>
+                  <div className="flex items-center gap-2 rounded-md bg-slate-100 border border-slate-200 px-2 py-1 shrink-0">
+                    <span className="text-xs font-semibold text-slate-900">{matchScore}</span>
+                    <span className="text-[10px] text-slate-500 uppercase tracking-widest font-medium">Rank</span>
                   </div>
                 </div>
 
-                <div className="flex items-center gap-3 mt-1 w-full text-xs text-neutral-500">
+                <div className="flex items-center gap-3 mt-1 w-full text-xs text-slate-500">
                   <span className="truncate max-w-[50%]">{t.organization || "No Organization Provided"}</span>
-                  <span className="w-1 h-1 rounded-full bg-[#333]"></span>
+                  <span className="w-1 h-1 rounded-full bg-slate-300"></span>
                   <span className="uppercase tracking-wider font-semibold text-neutral-400">
                     {portalLabel(t.source_site)}
                   </span>
-                  <span className="w-1 h-1 rounded-full bg-[#333]"></span>
-                  <span className="text-blue-400/80">{percentage}% Semantic Match</span>
+                  <span className="w-1 h-1 rounded-full bg-slate-300"></span>
+                  <span className="text-slate-700">{percentage}% Semantic Match</span>
                 </div>
               </button>
             );

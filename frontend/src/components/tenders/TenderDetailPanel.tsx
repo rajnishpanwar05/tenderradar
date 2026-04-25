@@ -47,7 +47,7 @@ export function TenderDetailPanel({ tender }: TenderDetailPanelProps) {
         <button
           type="button"
           onClick={() => router.back()}
-          className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground"
+          className="inline-flex items-center gap-1.5 text-sm text-slate-500 hover:text-slate-900"
         >
           <ArrowLeft className="h-4 w-4" />
           Back
@@ -55,10 +55,10 @@ export function TenderDetailPanel({ tender }: TenderDetailPanelProps) {
 
         {/* Title + org + country */}
         <div>
-          <h1 className="mb-2 text-2xl font-bold leading-snug">
+          <h1 className="mb-2 text-2xl font-semibold leading-snug text-slate-950">
             {tender.title_clean || tender.title}
           </h1>
-          <p className="text-sm text-muted-foreground">
+          <p className="text-sm text-slate-500">
             {[tender.organization, tender.country].filter(Boolean).join(" · ")}
           </p>
         </div>
@@ -71,7 +71,7 @@ export function TenderDetailPanel({ tender }: TenderDetailPanelProps) {
             showScore
             className="px-4 py-1.5 text-sm"
           />
-          <span className="text-sm text-muted-foreground">
+          <span className="text-sm text-slate-500">
             Overall fit score
           </span>
         </div>
@@ -80,7 +80,7 @@ export function TenderDetailPanel({ tender }: TenderDetailPanelProps) {
         {tender.has_description && tender.description && (
           <section>
             <h2 className="mb-2 text-base font-semibold">Description</h2>
-            <div className="prose prose-sm max-w-none text-sm leading-relaxed text-muted-foreground">
+            <div className="prose prose-sm max-w-none text-sm leading-relaxed text-slate-600">
               {tender.description}
             </div>
           </section>
@@ -94,7 +94,7 @@ export function TenderDetailPanel({ tender }: TenderDetailPanelProps) {
               {tender.top_reasons.map((reason, i) => (
                 <li key={i} className="flex items-start gap-2.5 text-sm">
                   <CheckCircle2
-                    className="mt-0.5 h-4 w-4 flex-shrink-0 text-emerald-500"
+                    className="mt-0.5 h-4 w-4 flex-shrink-0 text-slate-700"
                     aria-hidden="true"
                   />
                   <span>{reason}</span>
@@ -107,14 +107,14 @@ export function TenderDetailPanel({ tender }: TenderDetailPanelProps) {
         {/* Red flags */}
         {tender.red_flags && tender.red_flags.length > 0 && (
           <section>
-            <h2 className="mb-3 text-base font-semibold text-red-600 dark:text-red-400">
+            <h2 className="mb-3 text-base font-semibold text-slate-900">
               Red Flags
             </h2>
             <ul className="space-y-2">
               {tender.red_flags.map((flag, i) => (
                 <li key={i} className="flex items-start gap-2.5 text-sm">
                   <AlertTriangle
-                    className="mt-0.5 h-4 w-4 flex-shrink-0 text-orange-500"
+                    className="mt-0.5 h-4 w-4 flex-shrink-0 text-slate-500"
                     aria-hidden="true"
                   />
                   <span>{flag}</span>
@@ -128,7 +128,7 @@ export function TenderDetailPanel({ tender }: TenderDetailPanelProps) {
         {tender.fit_explanation && (
           <section>
             <h2 className="mb-2 text-base font-semibold">Fit Assessment</h2>
-            <p className="italic text-sm text-muted-foreground">
+            <p className="italic text-sm text-slate-500">
               {tender.fit_explanation}
             </p>
           </section>
@@ -140,9 +140,9 @@ export function TenderDetailPanel({ tender }: TenderDetailPanelProps) {
           tender.deep_min_similar_projects || tender.deep_eligibility_raw) && (
           <section>
             <div className="flex items-center gap-2 mb-4">
-              <FileText className="h-4 w-4 text-blue-500" />
+              <FileText className="h-4 w-4 text-slate-700" />
               <h2 className="text-base font-semibold">Bid Intelligence</h2>
-              <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-blue-50 text-blue-600 border border-blue-100 dark:bg-blue-950 dark:text-blue-400 dark:border-blue-900">
+              <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-slate-100 text-slate-700 border border-slate-200">
                 AI Extracted
               </span>
             </div>
@@ -161,16 +161,16 @@ export function TenderDetailPanel({ tender }: TenderDetailPanelProps) {
                   <div className="flex items-center gap-3">
                     {tender.deep_eval_technical_weight != null && (
                       <div className="flex items-center gap-1.5">
-                        <div className="h-2 rounded-full bg-blue-500" style={{ width: `${tender.deep_eval_technical_weight}px`, maxWidth: "80px", minWidth: "16px" }} />
+                        <div className="h-2 rounded-full bg-slate-900" style={{ width: `${tender.deep_eval_technical_weight}px`, maxWidth: "80px", minWidth: "16px" }} />
                         <span className="font-semibold">{tender.deep_eval_technical_weight}%</span>
-                        <span className="text-muted-foreground">Technical</span>
+                        <span className="text-slate-500">Technical</span>
                       </div>
                     )}
                     {tender.deep_eval_financial_weight != null && (
                       <div className="flex items-center gap-1.5">
-                        <div className="h-2 rounded-full bg-emerald-500" style={{ width: `${tender.deep_eval_financial_weight}px`, maxWidth: "80px", minWidth: "16px" }} />
+                        <div className="h-2 rounded-full bg-slate-600" style={{ width: `${tender.deep_eval_financial_weight}px`, maxWidth: "80px", minWidth: "16px" }} />
                         <span className="font-semibold">{tender.deep_eval_financial_weight}%</span>
-                        <span className="text-muted-foreground">Financial</span>
+                        <span className="text-slate-500">Financial</span>
                       </div>
                     )}
                   </div>
@@ -237,11 +237,11 @@ export function TenderDetailPanel({ tender }: TenderDetailPanelProps) {
             {/* Amendment alert */}
             {tender.amendment_count != null && tender.amendment_count > 0 && (
               <div className="mt-3 flex items-start gap-2 rounded-md border border-amber-200 bg-amber-50 p-3 dark:border-amber-800 dark:bg-amber-900/20">
-                <AlertTriangle className="mt-0.5 h-4 w-4 flex-shrink-0 text-amber-600 dark:text-amber-400" />
-                <div className="text-xs text-amber-700 dark:text-amber-400">
+                <AlertTriangle className="mt-0.5 h-4 w-4 flex-shrink-0 text-slate-500" />
+                <div className="text-xs text-slate-600">
                   <p className="font-semibold">{tender.amendment_count} amendment{tender.amendment_count > 1 ? "s" : ""} detected</p>
                   {tender.last_amended_at && (
-                    <p className="mt-0.5 text-muted-foreground">Last changed: {new Date(tender.last_amended_at).toLocaleDateString()}</p>
+                    <p className="mt-0.5 text-slate-500">Last changed: {new Date(tender.last_amended_at).toLocaleDateString()}</p>
                   )}
                   <p className="mt-0.5">Verify scope, budget, and deadline before submitting.</p>
                 </div>
@@ -254,7 +254,7 @@ export function TenderDetailPanel({ tender }: TenderDetailPanelProps) {
       {/* ── Right: sidebar ── */}
       <aside className="space-y-4 lg:sticky lg:top-6 lg:self-start">
         <TenderBriefPanel tender={tender} />
-        <Card>
+        <Card className="shadow-sm">
           <CardContent className="space-y-5 p-5">
             {/* Metadata */}
             <section>
@@ -403,7 +403,7 @@ function DeepRow({
   children: React.ReactNode;
 }) {
   return (
-    <div className="rounded-lg border border-border bg-muted/30 p-3 text-sm">
+    <div className="rounded-lg border border-slate-200 bg-slate-50 p-3 text-sm">
       <div className="flex items-center gap-1.5 mb-1.5">
         <Icon className="h-3.5 w-3.5 text-blue-500 flex-shrink-0" />
         <span className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">

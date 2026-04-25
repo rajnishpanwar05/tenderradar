@@ -9,15 +9,15 @@ interface EmptyStateProps {
 export function EmptyState({ message, onReset }: EmptyStateProps) {
   return (
     <div className="flex flex-col items-center justify-center py-20 text-center">
-      <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-muted">
-        <FileSearch className="h-8 w-8 text-muted-foreground" aria-hidden="true" />
+      <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-slate-100 border border-slate-200">
+        <FileSearch className="h-8 w-8 text-slate-500" aria-hidden="true" />
       </div>
-      <h3 className="mb-2 text-lg font-semibold">No tenders found</h3>
+      <h3 className="mb-2 text-lg font-semibold text-slate-950">No tenders found</h3>
       {message && (
-        <p className="mb-6 max-w-sm text-sm text-muted-foreground">{message}</p>
+        <p className="mb-6 max-w-sm text-sm text-slate-500">{message}</p>
       )}
       {!message && (
-        <p className="mb-6 max-w-sm text-sm text-muted-foreground">
+        <p className="mb-6 max-w-sm text-sm text-slate-500">
           Try adjusting your filters or search query to find relevant tenders.
         </p>
       )}

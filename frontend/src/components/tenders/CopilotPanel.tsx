@@ -37,20 +37,20 @@ const VERDICT_CONFIG: Record<
   BID: {
     label:     "Recommend Bid",
     icon:      ThumbsUp,
-    className: "text-emerald-700 bg-emerald-50 border-emerald-200 dark:text-emerald-400 dark:bg-emerald-900/20 dark:border-emerald-700",
-    barClass:  "bg-emerald-500",
+    className: "text-slate-900 bg-white border-slate-200",
+    barClass:  "bg-slate-900",
   },
   CONSIDER: {
     label:     "Worth Considering",
     icon:      HelpCircle,
-    className: "text-amber-700 bg-amber-50 border-amber-200 dark:text-amber-400 dark:bg-amber-900/20 dark:border-amber-700",
-    barClass:  "bg-amber-500",
+    className: "text-slate-800 bg-white border-slate-200",
+    barClass:  "bg-slate-600",
   },
   SKIP: {
     label:     "Skip",
     icon:      ThumbsDown,
-    className: "text-red-700 bg-red-50 border-red-200 dark:text-red-400 dark:bg-red-900/20 dark:border-red-700",
-    barClass:  "bg-red-500",
+    className: "text-slate-700 bg-white border-slate-200",
+    barClass:  "bg-slate-400",
   },
 };
 
@@ -59,11 +59,11 @@ const VERDICT_CONFIG: Record<
 function ConfidenceBar({ pct, barClass }: { pct: number; barClass: string }) {
   return (
     <div className="space-y-1">
-      <div className="flex items-center justify-between text-xs text-muted-foreground">
+      <div className="flex items-center justify-between text-xs text-slate-500">
         <span>Confidence</span>
         <span className="font-semibold tabular-nums">{pct}%</span>
       </div>
-      <div className="h-1.5 w-full overflow-hidden rounded-full bg-muted">
+      <div className="h-1.5 w-full overflow-hidden rounded-full bg-slate-100">
         <div
           className={cn("h-full rounded-full transition-all duration-700", barClass)}
           style={{ width: `${pct}%` }}
@@ -97,7 +97,7 @@ function Section({
       <button
         type="button"
         onClick={() => setOpen(o => !o)}
-        className="flex w-full items-center justify-between text-xs font-semibold uppercase tracking-wide text-muted-foreground hover:text-foreground transition-colors"
+        className="flex w-full items-center justify-between text-xs font-semibold uppercase tracking-wide text-slate-500 hover:text-slate-900 transition-colors"
       >
         {title}
         {open
@@ -152,9 +152,9 @@ export function CopilotPanel({ tenderId }: CopilotPanelProps) {
   // ── Idle — show button only ───────────────────────────────────────────────
   if (state === "idle") {
     return (
-      <div className="rounded-xl border border-dashed border-primary/30 bg-primary/3 p-4 text-center">
-        <Sparkles className="mx-auto mb-2 h-6 w-6 text-primary/70" />
-        <p className="mb-3 text-xs text-muted-foreground leading-relaxed">
+      <div className="rounded-xl border border-dashed border-slate-300 bg-white p-4 text-center">
+        <Sparkles className="mx-auto mb-2 h-6 w-6 text-slate-700" />
+        <p className="mb-3 text-xs text-slate-500 leading-relaxed">
           Get an AI-powered bid recommendation with strategic reasoning
         </p>
         <button
@@ -162,7 +162,7 @@ export function CopilotPanel({ tenderId }: CopilotPanelProps) {
           onClick={handleAskAI}
           className={cn(
             "inline-flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-semibold",
-            "bg-primary text-primary-foreground hover:bg-primary/90 transition-colors",
+            "bg-slate-900 text-white hover:bg-slate-800 transition-colors",
             "shadow-sm",
           )}
         >
@@ -176,9 +176,9 @@ export function CopilotPanel({ tenderId }: CopilotPanelProps) {
   // ── Loading ───────────────────────────────────────────────────────────────
   if (state === "loading") {
     return (
-      <div className="rounded-xl border border-primary/20 bg-primary/3 p-5 text-center space-y-3">
-        <Loader2 className="mx-auto h-6 w-6 animate-spin text-primary" />
-        <p className="text-xs text-muted-foreground">
+      <div className="rounded-xl border border-slate-200 bg-white p-5 text-center space-y-3">
+        <Loader2 className="mx-auto h-6 w-6 animate-spin text-slate-700" />
+        <p className="text-xs text-slate-500">
           Analysing tender…
         </p>
         <div className="space-y-1.5">
@@ -197,12 +197,12 @@ export function CopilotPanel({ tenderId }: CopilotPanelProps) {
   // ── Error ─────────────────────────────────────────────────────────────────
   if (state === "error") {
     return (
-      <div className="rounded-xl border border-red-200 bg-red-50 p-4 dark:border-red-800 dark:bg-red-900/20">
-        <p className="text-sm text-red-700 dark:text-red-400 mb-3">{error}</p>
+      <div className="rounded-xl border border-slate-200 bg-white p-4">
+        <p className="text-sm text-slate-600 mb-3">{error}</p>
         <button
           type="button"
           onClick={() => setState("idle")}
-          className="text-xs font-semibold text-red-700 dark:text-red-400 hover:underline"
+          className="text-xs font-semibold text-slate-700 hover:underline"
         >
           Try again
         </button>
@@ -249,7 +249,7 @@ export function CopilotPanel({ tenderId }: CopilotPanelProps) {
         title="Why"
         items={result.why}
         icon={CheckCircle2}
-        iconClass="text-emerald-500"
+        iconClass="text-slate-700"
         defaultExpanded
       />
 
@@ -258,7 +258,7 @@ export function CopilotPanel({ tenderId }: CopilotPanelProps) {
         title="Risks"
         items={result.risks}
         icon={AlertTriangle}
-        iconClass="text-orange-500"
+        iconClass="text-slate-500"
         defaultExpanded
       />
 
@@ -267,7 +267,7 @@ export function CopilotPanel({ tenderId }: CopilotPanelProps) {
         title="Strategy"
         items={result.strategy}
         icon={Zap}
-        iconClass="text-primary"
+        iconClass="text-slate-700"
         defaultExpanded={false}
       />
 
@@ -275,7 +275,7 @@ export function CopilotPanel({ tenderId }: CopilotPanelProps) {
       <button
         type="button"
         onClick={() => { setResult(null); setState("idle"); }}
-        className="text-xs text-muted-foreground hover:text-foreground underline-offset-2 hover:underline transition-colors"
+        className="text-xs text-slate-500 hover:text-slate-900 underline-offset-2 hover:underline transition-colors"
       >
         Re-run analysis
       </button>
