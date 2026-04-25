@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import type { Metadata } from "next";
 import { Suspense } from "react";
 import { apiClient } from "@/lib/api";
@@ -43,8 +44,8 @@ export default function PortalsPage() {
   return (
     <div className="space-y-4">
       <div>
-        <h1 className="text-xl font-semibold">Portals</h1>
-        <p className="text-sm text-muted-foreground">
+        <h1 className="text-2xl font-semibold tracking-tight text-slate-950">Portals</h1>
+        <p className="text-sm text-slate-500">
           Health and coverage metrics for all integrated procurement portals
         </p>
       </div>

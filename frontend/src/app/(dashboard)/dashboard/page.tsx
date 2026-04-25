@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import { Suspense } from "react";
 import { apiClient } from "@/lib/api";
 import { DashboardPage } from "@/components/dashboard/DashboardPage";

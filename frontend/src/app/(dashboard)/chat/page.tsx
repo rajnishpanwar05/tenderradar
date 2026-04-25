@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import { ChatPage } from "@/components/chat/ChatPage";
 
 export const metadata = {
