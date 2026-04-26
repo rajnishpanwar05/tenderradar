@@ -1,4 +1,5 @@
 import os
+from celery.schedules import crontab
 
 broker_url = os.environ.get("REDIS_URL", "redis://localhost:6379/0")
 result_backend = broker_url
@@ -11,4 +12,12 @@ worker_prefetch_multiplier = 1
 broker_transport_options = {"visibility_timeout": 3600}
 task_acks_late = True
 task_default_queue = "tenderradar"
+
+# Run full scrape pipeline every day at 02:00 UTC
+beat_schedule = {
+    "daily-scrape": {
+        "task": "core.tasks.run_full_pipeline",
+        "schedule": crontab(hour=2, minute=0),
+    },
+}
 

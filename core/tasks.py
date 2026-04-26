@@ -156,9 +156,43 @@ def task_run_phase3_intelligence(self, tender_batch: List[Dict[str, Any]]):
     """
     if not tender_batch:
         return 0
-        
+
     try:
         return run_phase3_intelligence_sync(tender_batch)
     except Exception as exc:
         logger.error(f"[Celery] Phase 3 pipeline failed: {exc}")
         raise self.retry(exc=exc, countdown=60)
+
+
+@celery_app.task(bind=True, name="core.tasks.run_full_pipeline", max_retries=1)
+def run_full_pipeline(self):
+    """
+    Scheduled daily task: run all enabled scrapers then process intelligence.
+    Triggered automatically by Celery Beat at 02:00 UTC every day.
+    """
+    logger.info("[Pipeline] Starting scheduled full scrape run")
+    try:
+        from core.registry import auto_jobs
+        from core.runner import JobRunner
+
+        jobs = auto_jobs()
+        logger.info("[Pipeline] %d portal jobs queued", len(jobs))
+
+        runner = JobRunner()
+        results = runner.run(jobs)
+
+        all_tenders: List[Dict[str, Any]] = []
+        for r in results:
+            if r.tenders:
+                all_tenders.extend(r.tenders)
+
+        logger.info("[Pipeline] Scraped %d raw tenders across %d portals", len(all_tenders), len(results))
+
+        if all_tenders:
+            process_intelligence_batch_sync(all_tenders)
+
+        logger.info("[Pipeline] Daily run complete")
+        return {"scraped": len(all_tenders), "portals": len(results)}
+    except Exception as exc:
+        logger.error("[Pipeline] Daily run failed: %s", exc)
+        raise self.retry(exc=exc, countdown=300)
